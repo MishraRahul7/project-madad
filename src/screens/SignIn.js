@@ -9,30 +9,58 @@ import {
   Button,
   Avatar,
 } from "@material-ui/core";
-
+import NavBar from "../container/NavBar"
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     height: "100vh",
-    backgroundColor: "#101726",
+    backgroundColor: "#EBEFF2",
   },
   paper: {
-    backgroundColor: "#EBEFF2",
+    marginTop: "100px",
+    backgroundColor: "#101726",
     display: "flex",
-    padding: "10px",
+    padding: "30px",
     borderRadius: "10px",
     flexDirection: "column",
     alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
+  signInBtn: {
+    margin: theme.spacing(3, 0, 0),
+    width: "10vw",
+  },
+  textcolor: {
+    color: "white",
+  },
+  bordercolor: {
+    border: "2px solid white",
+    borderRadius: "10px",
+  },
+  root: {
+    "& label.Mui-focused": {
+      color: "white",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "yellow",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "white",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+    },
   },
 }));
 
@@ -40,64 +68,66 @@ const SignIn = () => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      justify="center"
-      alignItems="center"
-      className={classes.mainContainer}
-    >
-      <Grid item xs={12} md={4} className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
+    <div className={classes.mainContainer}>
+      <Grid container justify="center" alignItems="center">
+        <NavBar />
+        <Grid item xs={12} md={4} className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" className={classes.textcolor}>
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="off"
+                  className={classes.root}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                />
+              </Grid>{" "}
+              <Grid item xs={12} align="center">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="default"
+                  className={classes.signInBtn}
+                >
+                  Sign In
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
+
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Don't have an account? Sign up
+                </Link>
+              </Grid>
             </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Don't have an account? Sign up
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 

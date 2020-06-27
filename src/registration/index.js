@@ -10,20 +10,23 @@ import {
   Typography,
   Grid,
 } from "@material-ui/core";
-
+import { useHistory } from "react-router-dom";
 import RegFormTwo from "./RegFormTwo";
 import RegFormThree from "./RegFormThree";
-import FormReview from "./FormReview";
+import NavBar from "../container/NavBar";
+import RegFormReview from "./RegFormReview";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "#101726",
+    backgroundColor: "#EBEFF2",
   },
   appBar: {
     position: "relative",
   },
   layout: {
     width: "auto",
+    color: "white",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
@@ -33,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
-    backgroundColor: "#EBEFF2",
-
+    backgroundColor: "#101726",
+    color: "white",
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
@@ -45,8 +48,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   stepper: {
-    backgroundColor: "#EBEFF2",
+    backgroundColor: "#101726",
     padding: theme.spacing(3, 0, 5),
+    color:"gray",
+    "& .MuiStepLabel-active": {
+      color: "white",
+    },
+    "& .MuiStepLabel-completed": {
+      color: "Gray",
+    },
   },
   buttons: {
     display: "flex",
@@ -58,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ["Personal Details", "Medical Details", "Review your Form"];
+const steps = ["Personal Details", "Contact Details", "Registration Complete"];
 
 const getStepContent = (step) => {
   switch (step) {
@@ -66,15 +76,19 @@ const getStepContent = (step) => {
       return <RegFormTwo />;
     case 1:
       return <RegFormThree />;
+
     case 2:
-      return <FormReview />;
+      return <RegFormReview />;
     default:
       throw new Error("Unknown step");
   }
 };
 
+
+
 const RegForm = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
@@ -93,6 +107,7 @@ const RegForm = () => {
         alignItems="center"
         className={classes.root}
       >
+        <NavBar />
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
@@ -109,32 +124,30 @@ const RegForm = () => {
             <React.Fragment>
               {activeStep === steps.length ? (
                 <React.Fragment>
-                  <Typography variant="h5" gutterBottom>
-                    Thank you for Registration.
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    We have emailed details confirmation when it's match other's
-                    requirement
-                  </Typography>
+                  <RegFormReview />
                 </React.Fragment>
               ) : (
                 <React.Fragment>
                   {getStepContent(activeStep)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
-                      <Button onClick={handleBack} className={classes.button}>
+                      <Button
+                        color="default"
+                        onClick={handleBack}
+                        className={classes.button}
+                      >
                         Back
                       </Button>
                     )}
                     <Button
                       variant="contained"
-                      color="primary"
-                      onClick={handleNext}
+                      color="default"
+                        onClick={steps.length - 1 === activeStep ?  () => {
+                        history.push("/")
+                      }:handleNext}
                       className={classes.button}
                     >
-                      {activeStep === steps.length - 1
-                        ? "Madical Details"
-                        : "Next"}
+                        {activeStep === steps.length - 1 ? "Finish" : "Next"},
                     </Button>
                   </div>
                 </React.Fragment>

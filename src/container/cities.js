@@ -6,62 +6,103 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  FormControl,
 } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
-  root: {},
-  gridItem: {},
+  gridItem: { color: "blue" },
+  fcontrol: {
+  width: "20vw",
+  },
 }));
 
 const Cities = () => {
+  
+const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
   const classes = useStyles();
-  const state = csc.getStatesOfCountry("101");
-  const city = csc.getCitiesOfState(state["8"].id);
-  console.log(city);
+  const stateList = csc.getStatesOfCountry("101");
 
-  const gender = ["Male", "Female", "Other"];
-  const [gen, setGender] = useState(gender);
-  const handleChangeGender = (event) => {
-    setGender(event.target.value);
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [bg, setBloodGroup] = useState("");
+
+  const cityList = csc.getCitiesOfState(state);
+
+  const handleChaangeState = (event) => {
+    setState(event.target.value);
+  };
+
+  const handleChaangeCity = (event) => {
+    setCity(event.target.value);
+  };
+
+  const handleChangeBG = (event) => {
+    setBloodGroup(event.target.value);
   };
   return (
     <>
-      <Grid
-        container
-        justify="center"
-        alignItems="center"
-        className={classes.root}
-      >
-        <Grid item xs={12} sm={2}>
-          <InputLabel id="demo-simple-select-label">State</InputLabel>
-          <Select
-            fullWidth
-            labelId="demo-simple-select-label"
-            id="gender"
-            value={gen}
-            onChange={handleChangeGender}
-          >
-            {gender.map((val) => (
-              <MenuItem key={val} value={val}>
-                {val}
+      <Grid container justify="center" alignItems="center">
+        <Grid item xs={12} sm={4} md={4}>
+          <FormControl className={classes.fcontrol}>
+            <InputLabel id="demo-simple-select-label">State</InputLabel>
+            <Select
+              fullWidth
+              labelId="demo-simple-select-label"
+              id="gender"
+              value={state}
+              onChange={handleChaangeState}
+            >
+              <MenuItem value="">
+                <em>None</em>
               </MenuItem>
-            ))}
-          </Select>
+              {stateList.map((val) => (
+                <MenuItem key={val.id} value={val.id}>
+                  {val.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
-        <Grid item xs={12} sm={2}>
-          <InputLabel id="demo-simple-select-label">Cities</InputLabel>
-          <Select
-            fullWidth
-            labelId="demo-simple-select-label"
-            id="gender"
-            value={gen}
-            onChange={handleChangeGender}
-          >
-            {gender.map((val) => (
-              <MenuItem key={val} value={val}>
-                {val}
+        <Grid item xs={12} sm={4} md={4}>
+          <FormControl className={classes.fcontrol}>
+            <InputLabel id="demo-simple-select-label">City</InputLabel>
+            <Select
+              fullWidth
+              labelId="demo-simple-select-label"
+              id="gender"
+              value={city}
+              onChange={handleChaangeCity}
+            >
+              <MenuItem value="">
+                <em>None</em>
               </MenuItem>
-            ))}
-          </Select>
+              {cityList.map((val) => (
+                <MenuItem key={val.id} value={val.name}>
+                  {val.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <FormControl className={classes.fcontrol}>
+            <InputLabel id="demo-simple-select-label">Blood Group</InputLabel>
+            <Select
+              fullWidth
+              labelId="demo-simple-select-label"
+              id="bloodGroup"
+              value={bg}
+              onChange={handleChangeBG}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {BloodGroup.map((val) => (
+                <MenuItem key={val} value={val}>
+                  {val}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
     </>

@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
   makeStyles,
   Typography,
   Grid,
+  Link,
   TextField,
   Button,
   Avatar,
@@ -13,10 +13,10 @@ import {
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     height: "100vh",
-    backgroundColor: "#101726",
+    backgroundColor: "#EBEFF2",
   },
   paper: {
-    backgroundColor: "#EBEFF2",
+    backgroundColor: "#101726",
     display: "flex",
     padding: "10px",
     borderRadius: "10px",

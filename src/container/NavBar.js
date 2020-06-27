@@ -1,20 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { makeStyles, AppBar, Toolbar, Typography } from "@material-ui/core";
+import { makeStyles, AppBar, Grid, Typography } from "@material-ui/core";
+import logo from "../images/new-logo2.png";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   title: {
-    marginRight: "30px",
     textDecoration: "none",
     "&:hover": {
-      borderBottom: "4px solid white",
+      borderBottom: "2px solid #cb0911",
     },
-  },
-  title2: {
-    marginRight: "1000px",
-    textDecoration: "none",
   },
   appMenu: {
     backgroundColor: "#011526",
@@ -22,11 +18,15 @@ const useStyles = makeStyles((theme) => ({
     position: "static",
     margin: "auto",
     alignItems: "flex-end",
-    width: "100vw",
+
   },
   link: {
     textDecoration: "none",
     color: "white",
+  },
+  logoPro: {
+    height: "8vh",
+
   },
 }));
 
@@ -36,28 +36,39 @@ export default function NavBar() {
   return (
     <div className={classes.root}>
       <AppBar className={classes.appMenu}>
-        <Toolbar>
-          <Typography variant="h5" className={classes.title2}>
-            <Link to="/" className={classes.link}>
-              Madad
-            </Link>
-          </Typography>
+        <Grid direction="row" container>
+          <Grid item md={4}>
+            <Typography>
+              <Link to="/" className={classes.link}>
+                <img className={classes.logoPro} src={logo} alt="Madad" />
+              </Link>
+            </Typography>
+          </Grid>
+          <Grid item md={4}>
+          
           <Typography variant="h6" className={classes.title}>
             <Link to="/find-donor" className={classes.link}>
               Find Donor
             </Link>
           </Typography>
-          <Typography variant="h6" className={classes.title}>
-            <Link to="/signup" className={classes.link}>
+          </Grid>
+          <Grid item md={4}>
+          
+            <Typography variant="h6" className={classes.title}>
+            <Link to="/registration" className={classes.link}>
               Become a Donor
             </Link>
           </Typography>
+          </Grid>
+          <Grid item md={4}>
+          
           <Typography variant="h6" className={classes.title}>
             <Link to="/signin" className={classes.link}>
               Login
             </Link>
           </Typography>
-        </Toolbar>
+          </Grid>
+          </Grid>
       </AppBar>
     </div>
   );
