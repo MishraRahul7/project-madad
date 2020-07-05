@@ -1,21 +1,10 @@
 import React from "react";
 import {
   makeStyles,
-  CssBaseline,
   Typography,
   Grid,
 } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
-  layout: {
-    width: "auto",
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
-  },
   message: {
     padding:"10px 0px 10px 0px",
     fontStyle:"italic"
@@ -27,8 +16,6 @@ const RegFormReview = () => {
   return (
     <React.Fragment>
       <Grid container justify="center" alignItems="center">
-        <CssBaseline />
-        <main className={classes.layout}>
           <Grid item xs={12} md={12}>
             <Typography variant="h6" align="center">
               Registration Complete
@@ -45,7 +32,6 @@ const RegFormReview = () => {
               Thank you for Registration.
             </Typography>
           </Grid>
-        </main>
       </Grid>
     </React.Fragment>
   );

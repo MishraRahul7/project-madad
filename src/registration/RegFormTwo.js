@@ -13,28 +13,34 @@ import {
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
+  whiteColor: {
+    color:"white"
   },
-  tColor: {
-    color: "white",
-  },
-  input: {
-    "&::placeholder": {
+  textfield: {
+    "& .MuiOutlinedInput-input": {
       color: "white",
     },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "white",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+      },
+    },
   },
-  notchedOutline: {
-    borderWidth: "1px",
-    borderColor: "White !important",
-  },
-  whiteColor: {
-    color: "white",
-  },
-  bordercolor: {
-    color:"white",
-    border: "1px solid white",
+  selectbox: {
+    "& .MuiSelect-select": {
+      color: "white",
+    },
+    "& .MuiSelect-iconOutlined": { color: "white" },
+    "& .MuiSelect-outlined": {
+      color: "white",
+       border: "1px solid white",   
+    },
   },
 }));
 
@@ -54,6 +60,7 @@ const RegFormTwo = (props) => {
     "Other",
   ];
 
+
   const [gen, setGender] = useState("");
   const [bg, setBloodGroup] = useState("");
   const [ocu, setOccupation] = useState("");
@@ -63,7 +70,6 @@ const RegFormTwo = (props) => {
   const handleChangeState = (event) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
-  console.log(state);
   const handleChangeGender = (event) => {
     setGender(event.target.value);
   };
@@ -84,119 +90,96 @@ const RegFormTwo = (props) => {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             id="custom-css-outlined-input"
-            placeholder="First Name"
+            label="First Name"
             fullWidth
-            InputProps={{
-              className: classes.tColor,
-              classes: {
-                input: classes.input,
-                notchedOutline: classes.notchedOutline,
-              },
-            }}
             variant="outlined"
             autoComplete="off"
             value={state.firstname}
             onChange={handleChangeState}
+            InputLabelProps={{
+              style: { color: "white" },
+            }}
+            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             id="lastName"
             name="lastName"
-            placeholder="Last Name"
-            InputProps={{
-              className: classes.tColor,
-              classes: {
-                input: classes.input,
-                notchedOutline: classes.notchedOutline,
-              },
-            }}
+            label="Last Name"
             variant="outlined"
             fullWidth
             autoComplete="off"
             value={state.lastname}
             onChange={handleChangeState}
+            InputLabelProps={{
+              style: { color: "white" },
+            }}
+            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             id="fatherName"
             name="fatherName"
-            placeholder="Father's name"
-            InputProps={{
-              className: classes.tColor,
-              classes: {
-                input: classes.input,
-                notchedOutline: classes.notchedOutline,
-              },
-            }}
+            label="Father's name"
             variant="outlined"
             fullWidth
             autoComplete="off"
             value={state.fatherName}
             onChange={handleChangeState}
+            InputLabelProps={{
+              style: { color: "white" },
+            }}
+            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             id="dob"
             name="dob"
-            placeholder="Date Of Birth  DD/MM/YYYY"
-            InputProps={{
-              className: classes.tColor,
-              classes: {
-                input: classes.input,
-                notchedOutline: classes.notchedOutline,
-              },
-            }}
+            label="Date Of Birth  DD/MM/YYYY"
             variant="outlined"
             fullWidth
             autoComplete="off"
             value={state.dob}
             onChange={handleChangeState}
+            InputLabelProps={{
+              style: { color: "white" },
+            }}
+            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
             id="age"
             name="age"
-            placeholder="Age"
-            InputProps={{
-              className: classes.tColor,
-              classes: {
-                input: classes.input,
-                notchedOutline: classes.notchedOutline,
-              },
-            }}
+            label="Age"
             variant="outlined"
-            placeholder="DD/MM/YYYY"
             fullWidth
             autoComplete="off"
             value={state.age}
             onChange={handleChangeState}
+            InputLabelProps={{
+              style: { color: "white" },
+            }}
+            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Select
-            fullWidth
-            labelId="gender"
-            id="gender"
             displayEmpty
+            fullWidth
             variant="outlined"
             value={gen}
-            classes={{
-              root: classes.bordercolor,
-              icon: classes.whiteColor,
-            }}
             onChange={handleChangeGender}
+            className={classes.selectbox}
+            
           >
-            <MenuItem value="">Gender</MenuItem>
+            <MenuItem value="" disabled>
+              Gender
+            </MenuItem>
             {gender.map((val) => (
               <MenuItem key={val} value={val}>
                 {val}
@@ -207,16 +190,11 @@ const RegFormTwo = (props) => {
         <Grid item xs={12} sm={6}>
           <Select
             fullWidth
-            labelId="occupation"
-            id="occupation"
             value={ocu}
-            classes={{
-              root: classes.bordercolor,
-              icon: classes.whiteColor,
-            }}
             displayEmpty
             variant="outlined"
             onChange={handleChangeOccupation}
+            className={classes.selectbox}
           >
             <MenuItem value="" disabled>
               Occupation
@@ -233,14 +211,11 @@ const RegFormTwo = (props) => {
             fullWidth
             displayEmpty
             variant="outlined"
-            classes={{
-              root: classes.bordercolor,
-              icon: classes.whiteColor,
-            }}
             labelId="bloodgroup"
             id="bloodgroup"
             value={bg}
             onChange={handleChangeBG}
+            className={classes.selectbox}
           >
             <MenuItem value="" disabled>
               Blood Group

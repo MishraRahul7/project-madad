@@ -1,7 +1,6 @@
 import React from "react";
 import {
   makeStyles,
-  CssBaseline,
   Paper,
   Stepper,
   Step,
@@ -50,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   stepper: {
     backgroundColor: "#101726",
     padding: theme.spacing(3, 0, 5),
-    color:"gray",
+    color: "gray",
     "& .MuiStepLabel-active": {
       color: "white",
     },
@@ -63,8 +62,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
   },
   button: {
+    color: "white",
+    backgroundColor: "#ac1c14",
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
+    "&:hover": {
+      backgroundColor: "#ac1c14",
+    }
   },
 }));
 
@@ -108,7 +112,6 @@ const RegForm = () => {
         className={classes.root}
       >
         <NavBar />
-        <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
@@ -147,7 +150,7 @@ const RegForm = () => {
                       }:handleNext}
                       className={classes.button}
                     >
-                        {activeStep === steps.length - 1 ? "Finish" : "Next"},
+                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
                     </Button>
                   </div>
                 </React.Fragment>

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import {
   Card,
   Grid,
@@ -10,7 +9,6 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { dataApi } from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -36,12 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const NewsCard = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.data);
 
-  useEffect(() => {
-    dispatch(dataApi());
-  }, [dispatch]);
   return (
     <React.Fragment>
       <Grid container className={classes.cardGrid}>

@@ -39,16 +39,9 @@ const useStyles = makeStyles((theme) => ({
   textcolor: {
     color: "white",
   },
-  bordercolor: {
-    border: "2px solid white",
-    borderRadius: "10px",
-  },
   root: {
-    "& label.Mui-focused": {
+    "& .MuiOutlinedInput-input": {
       color: "white",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "yellow",
     },
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
@@ -85,10 +78,14 @@ const SignIn = () => {
                   variant="outlined"
                   required
                   fullWidth
+                  color="default"
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="off"
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
                   className={classes.root}
                 />
               </Grid>
@@ -102,6 +99,10 @@ const SignIn = () => {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  InputLabelProps={{
+                    style: { color: "white" },
+                  }}
+                  className={classes.root}
                 />
               </Grid>{" "}
               <Grid item xs={12} align="center">
@@ -119,7 +120,7 @@ const SignIn = () => {
 
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to="/signup" variant="body2" color="Default">
                   Don't have an account? Sign up
                 </Link>
               </Grid>

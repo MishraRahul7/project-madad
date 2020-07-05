@@ -1,75 +1,81 @@
 import React from "react";
+import { AppBar,Typography,Toolbar, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { makeStyles, AppBar, Grid, Typography } from "@material-ui/core";
-import logo from "../images/new-logo2.png";
+
+import logo from "../images/new-logo2.png"
 const useStyles = makeStyles((theme) => ({
-  root: {
+  appBar: {
+    fontFamily: "Roboto",
+    backgroundColor: "#011526",
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbar: {
+    flexWrap: "wrap",
+  },
+  toolbarTitle: {
     flexGrow: 1,
   },
-  title: {
+  link: {
+    color: "#EBEFF2",
+    textTransform: "uppercase",
+    margin: theme.spacing(1, 1.5),
     textDecoration: "none",
     "&:hover": {
-      borderBottom: "2px solid #cb0911",
+      paddingBottom: "3px",
+      borderBottom: "2px solid #ac1c14",
     },
   },
-  appMenu: {
-    backgroundColor: "#011526",
-    color: "#101726",
-    position: "static",
-    margin: "auto",
-    alignItems: "flex-end",
-
-  },
-  link: {
-    textDecoration: "none",
-    color: "white",
-  },
-  logoPro: {
+  logoProp: {
     height: "8vh",
-
   },
 }));
 
-export default function NavBar() {
+export default function Pricing() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar className={classes.appMenu}>
-        <Grid direction="row" container>
-          <Grid item md={4}>
-            <Typography>
-              <Link to="/" className={classes.link}>
-                <img className={classes.logoPro} src={logo} alt="Madad" />
-              </Link>
-            </Typography>
-          </Grid>
-          <Grid item md={4}>
-          
-          <Typography variant="h6" className={classes.title}>
-            <Link to="/find-donor" className={classes.link}>
+    <React.Fragment>
+      <AppBar
+        position="static"
+        color="default"
+        elevation={0}
+        className={classes.appBar}
+      >
+        <Toolbar className={classes.toolbar}>
+          <Typography
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.toolbarTitle}
+          >
+            <Link to="/">
+              <img className={classes.logoProp} src={logo} alt="Madad" />
+            </Link>
+          </Typography>
+          <nav>
+            <Link
+              to="/find-donor"
+              variant="button"
+              color="textPrimary"
+              className={classes.link}
+            >
               Find Donor
             </Link>
-          </Typography>
-          </Grid>
-          <Grid item md={4}>
-          
-            <Typography variant="h6" className={classes.title}>
-            <Link to="/registration" className={classes.link}>
-              Become a Donor
+            <Link
+              to="/registration"
+              variant="button"
+              color="textPrimary"
+              className={classes.link}
+            >
+              Become A Donor
             </Link>
-          </Typography>
-          </Grid>
-          <Grid item md={4}>
-          
-          <Typography variant="h6" className={classes.title}>
+
             <Link to="/signin" className={classes.link}>
               Login
             </Link>
-          </Typography>
-          </Grid>
-          </Grid>
+          </nav>
+        </Toolbar>
       </AppBar>
-    </div>
+    </React.Fragment>
   );
 }
