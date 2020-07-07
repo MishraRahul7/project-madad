@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiStepLabel-completed": {
       color: "Gray",
     },
+    "& .MuiStepLabel-disabled": {
+      color: "red",
+    },
   },
   buttons: {
     display: "flex",
@@ -68,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     "&:hover": {
       backgroundColor: "#ac1c14",
-    }
+    },
   },
 }));
 

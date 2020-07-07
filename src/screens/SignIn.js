@@ -9,6 +9,9 @@ import {
   Button,
   Avatar,
 } from "@material-ui/core";
+import { Icon } from '@iconify/react';
+import googleIcon from '@iconify/icons-mdi/google';
+
 import NavBar from "../container/NavBar"
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -38,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
   },
   textcolor: {
     color: "white",
+  },
+  iconColor: {
+    color: "#ac1c14",
+    
   },
   root: {
     "& .MuiOutlinedInput-input": {
@@ -72,8 +79,8 @@ const SignIn = () => {
             Sign in
           </Typography>
           <form className={classes.form} noValidate>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
+            <Grid container direction="row" spacing={2}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -89,7 +96,7 @@ const SignIn = () => {
                   className={classes.root}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -105,7 +112,7 @@ const SignIn = () => {
                   className={classes.root}
                 />
               </Grid>{" "}
-              <Grid item xs={12} align="center">
+              <Grid item xs={12} md={12} align="center">
                 <Button
                   type="submit"
                   fullWidth
@@ -116,11 +123,26 @@ const SignIn = () => {
                   Sign In
                 </Button>
               </Grid>
-            </Grid>
-
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link to="/signup" variant="body2" color="Default">
+              <Grid item md={12}>
+                <Typography className={classes.textcolor} align="center">
+                  OR
+                </Typography>
+              </Grid>
+              <Grid item md={6}>
+                <Link to="/" variant="body2" color="Default">
+                  <Icon
+                    className={classes.iconColor}
+                    height="1.5em"
+                    icon={googleIcon}
+                  />
+                </Link>
+              </Grid>
+              <Grid item md={6}>
+                <Link
+                  to="/signup"
+                  variant="body2"
+                  className={classes.textcolor}
+                >
                   Don't have an account? Sign up
                 </Link>
               </Grid>
