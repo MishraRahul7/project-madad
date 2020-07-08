@@ -1,14 +1,20 @@
 import React from "react";
-import { AppBar,Typography,Toolbar, makeStyles, Hidden } from "@material-ui/core";
+import {
+  AppBar,
+  Typography,
+  Toolbar,
+  makeStyles,
+  Hidden,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import logo from "../images/new-logo2.png"
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import logo from "../images/new-logo2.png";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     fontFamily: "Roboto",
-    backgroundColor: "#011526",
+    backgroundColor: "#F2F2F2",
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
   toolbar: {
@@ -18,27 +24,27 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   link: {
-    color: "#EBEFF2",
+    color: "#0D0D0D",
     textTransform: "uppercase",
     margin: theme.spacing(1, 1.5),
     textDecoration: "none",
     "&:hover": {
       paddingBottom: "3px",
-      borderBottom: "2px solid #ac1c14",
+      borderBottom: "2px solid #F20505",
     },
   },
   logoProp: {
     height: "8vh",
   },
-  
+
   menuIcon: {
-    position: 'relative',
+    position: "relative",
     fontSize: theme.spacing(4.5),
-    color: 'white',
-    [theme.breakpoints.only('xs')]: {
-        fontSize: theme.spacing(3.5),
-    }
-},
+    color: "white",
+    [theme.breakpoints.only("xs")]: {
+      fontSize: theme.spacing(3.5),
+    },
+  },
 }));
 
 export default function Pricing() {
@@ -49,7 +55,7 @@ export default function Pricing() {
       <AppBar
         position="static"
         color="default"
-        elevation={0}
+        elevation={5}
         className={classes.appBar}
       >
         <Toolbar className={classes.toolbar}>
@@ -88,10 +94,14 @@ export default function Pricing() {
             </Hidden>
           </nav>
           <Hidden mdUp smUp>
-            <IconButton edge="start" className={classes.menuIcon} color="inherit" aria-label="menu">
+            <IconButton
+              edge="start"
+              className={classes.menuIcon}
+              color="inherit"
+              aria-label="menu"
+            >
               <MenuIcon />
             </IconButton>
-            
           </Hidden>
         </Toolbar>
       </AppBar>

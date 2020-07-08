@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   footer: {
     color: "white",
-    backgroundColor: "#011526",
+    backgroundColor: "#F20544",
     padding: theme.spacing(2),
   },
   CardContent: {

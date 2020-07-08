@@ -12,8 +12,8 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    backgroundColor: "#101726",
-    color: "#ffffff",
+    backgroundColor: "#F20544",
+    color: "#0D0D0D",
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   btn: {
     color: "white",
+    borderColor: "white",
   },
 }));
 const NewsCard = (props) => {
@@ -53,11 +54,13 @@ const NewsCard = (props) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" className={classes.btn}>
-              View
-            </Button>
-            <Button size="small" className={classes.btn}>
-              Edit
+            <Button
+              variant="outlined"
+              size="small"
+              align="right"
+              className={classes.btn}
+            >
+              View full news
             </Button>
           </CardActions>
         </Card>
