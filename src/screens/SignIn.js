@@ -1,5 +1,4 @@
 import React from "react";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import {
   makeStyles,
   Typography,
@@ -7,22 +6,24 @@ import {
   Link,
   TextField,
   Button,
-  Avatar,
+  Paper
 } from "@material-ui/core";
 import { Icon } from '@iconify/react';
-import googleIcon from '@iconify/icons-mdi/google';
+import googleIcon from "@iconify/icons-mdi/google";
+import facebookIcon from "@iconify/icons-mdi/facebook";
 
 import NavBar from "../container/NavBar"
 const useStyles = makeStyles((theme) => ({
+
   mainContainer: {
     height: "100vh",
     backgroundColor: "#EBEFF2",
   },
   paper: {
-    marginTop: "100px",
-    backgroundColor: "#101726",
+    backgroundColor: "#011526",
     display: "flex",
     padding: "30px",
+    margin:"2em 0em 2em 0em",
     borderRadius: "10px",
     flexDirection: "column",
     alignItems: "center",
@@ -36,15 +37,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   signInBtn: {
-    margin: theme.spacing(3, 0, 0),
-    width: "10vw",
+    margin: theme.spacing(1, 0, 0),
   },
-  textcolor: {
+  signInHead: {
     color: "white",
+    fontSize: "2rem",
   },
-  iconColor: {
-    color: "#ac1c14",
-    
+  signUpLink: { color: "white" },
+  icons: {
+    paddingRight: "1em",
+    color: "#white",
   },
   root: {
     "& .MuiOutlinedInput-input": {
@@ -62,6 +64,11 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  socialLoginButton: {
+    color: "white",
+    borderColor: "white",
+    marginBottom: theme.spacing(1),
+  },
 }));
 
 const SignIn = () => {
@@ -69,85 +76,110 @@ const SignIn = () => {
 
   return (
     <div className={classes.mainContainer}>
-      <Grid container justify="center" alignItems="center">
-        <NavBar />
-        <Grid item xs={12} md={4} className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" className={classes.textcolor}>
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <Grid container direction="row" spacing={2}>
-              <Grid item xs={12} md={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  color="default"
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="off"
-                  InputLabelProps={{
-                    style: { color: "white" },
-                  }}
-                  className={classes.root}
-                />
-              </Grid>
-              <Grid item xs={12} md={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  InputLabelProps={{
-                    style: { color: "white" },
-                  }}
-                  className={classes.root}
-                />
-              </Grid>{" "}
-              <Grid item xs={12} md={12} align="center">
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="default"
-                  className={classes.signInBtn}
-                >
-                  Sign In
-                </Button>
-              </Grid>
-              <Grid item md={12}>
-                <Typography className={classes.textcolor} align="center">
-                  OR
-                </Typography>
-              </Grid>
-              <Grid item md={6}>
-                <Link to="/" variant="body2" color="Default">
-                  <Icon
-                    className={classes.iconColor}
-                    height="1.5em"
-                    icon={googleIcon}
+      <NavBar />
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Grid item xs={12} md={4}>
+          <Paper className={classes.paper}>
+            <Typography component="h1" className={classes.signInHead}>
+              Sign In With
+            </Typography>
+            <form className={classes.form} noValidate>
+              <Grid container direction="row" spacing={2}>
+                <Grid item xs={12} md={6} align="right">
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    fullWidth
+                    className={classes.socialLoginButton}
+                  >
+                    <Link to="/" variant="body2" color="Default">
+                      <Icon
+                        height="2em"
+                        className={classes.icons}
+                        icon={facebookIcon}
+                      />
+                    </Link>
+                    Facebook
+                  </Button>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    fullWidth
+                    className={classes.socialLoginButton}
+                  >
+                    <Link to="/" variant="body2" color="Default">
+                      <Icon
+                        height="2em"
+                        className={classes.icons}
+                        icon={googleIcon}
+                      />
+                    </Link>
+                    Google
+                  </Button>
+                </Grid>
+                <Grid item xs={12} md={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    color="default"
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="off"
+                    InputLabelProps={{
+                      style: { color: "white" },
+                    }}
+                    className={classes.root}
                   />
-                </Link>
+                </Grid>
+                <Grid item xs={12} md={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    InputLabelProps={{
+                      style: { color: "white" },
+                    }}
+                    className={classes.root}
+                  />
+                </Grid>
+                <Grid item xs={12} md={12} align="center">
+                  <Button
+                    type="submit"
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                    color="default"
+                    className={classes.signInBtn}
+                  >
+                    Sign In
+                  </Button>
+                </Grid>
+                <Grid item xs={12} md={12}>
+                  <Typography className={classes.signUpLink} align="center">
+                    OR
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={12} align="center">
+                  <Link
+                    to="/signup"
+                    variant="body2"
+                    className={classes.signUpLink}
+                  >
+                    Not a Donor? Sign Up Now
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item md={6}>
-                <Link
-                  to="/signup"
-                  variant="body2"
-                  className={classes.textcolor}
-                >
-                  Don't have an account? Sign up
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
+            </form>
+          </Paper>
         </Grid>
       </Grid>
     </div>

@@ -1,7 +1,9 @@
 import React from "react";
-import { AppBar,Typography,Toolbar, makeStyles } from "@material-ui/core";
+import { AppBar,Typography,Toolbar, makeStyles, Hidden } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import logo from "../images/new-logo2.png"
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -28,6 +30,15 @@ const useStyles = makeStyles((theme) => ({
   logoProp: {
     height: "8vh",
   },
+  
+  menuIcon: {
+    position: 'relative',
+    fontSize: theme.spacing(4.5),
+    color: 'white',
+    [theme.breakpoints.only('xs')]: {
+        fontSize: theme.spacing(3.5),
+    }
+},
 }));
 
 export default function Pricing() {
@@ -53,27 +64,35 @@ export default function Pricing() {
             </Link>
           </Typography>
           <nav>
-            <Link
-              to="/find-donor"
-              variant="button"
-              color="textPrimary"
-              className={classes.link}
-            >
-              Find Donor
-            </Link>
-            <Link
-              to="/registration"
-              variant="button"
-              color="textPrimary"
-              className={classes.link}
-            >
-              Become A Donor
-            </Link>
+            <Hidden only="xs">
+              <Link
+                to="/find-donor"
+                variant="button"
+                color="textPrimary"
+                className={classes.link}
+              >
+                Find Donor
+              </Link>
+              <Link
+                to="/registration"
+                variant="button"
+                color="textPrimary"
+                className={classes.link}
+              >
+                Become A Donor
+              </Link>
 
-            <Link to="/signin" className={classes.link}>
-              Login
-            </Link>
+              <Link to="/signin" className={classes.link}>
+                Login
+              </Link>
+            </Hidden>
           </nav>
+          <Hidden mdUp smUp>
+            <IconButton edge="start" className={classes.menuIcon} color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+            
+          </Hidden>
         </Toolbar>
       </AppBar>
     </React.Fragment>
