@@ -1,29 +1,27 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   makeStyles,
   Typography,
   Grid,
-  Link,
   TextField,
   Button,
-  Paper
+  Paper,
 } from "@material-ui/core";
-import { Icon } from '@iconify/react';
+import { Icon } from "@iconify/react";
 import googleIcon from "@iconify/icons-mdi/google";
 import facebookIcon from "@iconify/icons-mdi/facebook";
 
-import NavBar from "../container/NavBar"
+import NavBar from "../container/NavBar";
 const useStyles = makeStyles((theme) => ({
-
   mainContainer: {
     height: "100vh",
-    backgroundColor: "#EBEFF2",
   },
   paper: {
-    backgroundColor: "#011526",
+    backgroundColor: "#b40008",
     display: "flex",
     padding: "30px",
-    margin:"2em 0em 2em 0em",
+    margin: "2em 0em 2em 0em",
     borderRadius: "10px",
     flexDirection: "column",
     alignItems: "center",
@@ -43,10 +41,10 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontSize: "2rem",
   },
-  signUpLink: { color: "white" },
+  signUpLink: { fontFamily: "Roboto", textDecoration: "none", color: "white" },
   icons: {
-    paddingRight: "1em",
-    color: "#white",
+    paddingRight: "0.5em",
+    color: "white",
   },
   root: {
     "& .MuiOutlinedInput-input": {
@@ -92,7 +90,7 @@ const SignIn = () => {
                     fullWidth
                     className={classes.socialLoginButton}
                   >
-                    <Link to="/" variant="body2" color="Default">
+                    <Link to="/" variant="body2">
                       <Icon
                         height="2em"
                         className={classes.icons}
@@ -109,7 +107,7 @@ const SignIn = () => {
                     fullWidth
                     className={classes.socialLoginButton}
                   >
-                    <Link to="/" variant="body2" color="Default">
+                    <Link to="/" variant="body2">
                       <Icon
                         height="2em"
                         className={classes.icons}
@@ -170,7 +168,7 @@ const SignIn = () => {
                 </Grid>
                 <Grid item xs={12} md={12} align="center">
                   <Link
-                    to="/signup"
+                    to="/registration"
                     variant="body2"
                     className={classes.signUpLink}
                   >

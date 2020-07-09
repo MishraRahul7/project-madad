@@ -25,9 +25,6 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: "#EBEFF2",
-  },
   heading: {
     margin: theme.spacing(0, 0, 4),
   },
@@ -46,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   card: {
-    backgroundColor: "#101726",
+    backgroundColor: "#b40008",
     color: "#ffffff",
     height: "100%",
     display: "flex",
@@ -60,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   footer: {
     color: "white",
-    backgroundColor: "#F20544",
+    backgroundColor: "#ef101a",
     padding: theme.spacing(2),
   },
   CardContent: {

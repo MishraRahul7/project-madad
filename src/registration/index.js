@@ -15,14 +15,7 @@ import RegFormThree from "./RegFormThree";
 import NavBar from "../container/NavBar";
 import RegFormReview from "./RegFormReview";
 
-
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: "#EBEFF2",
-  },
-  appBar: {
-    position: "relative",
-  },
   layout: {
     width: "auto",
     color: "white",
@@ -35,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
-    backgroundColor: "#101726",
+    backgroundColor: "#b40008",
     color: "white",
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
@@ -47,18 +40,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   stepper: {
-    backgroundColor: "#101726",
+    backgroundColor: "#b40008",
     padding: theme.spacing(3, 0, 5),
-    color: "gray",
     "& .MuiStepLabel-active": {
       color: "white",
     },
     "& .MuiStepLabel-completed": {
-      color: "Gray",
+      color: "white",
     },
-    "& .MuiStepLabel-disabled": {
-      color: "red",
-    },
+    "& .MuiStepIcon-active": { color: "white" },
+    "& .MuiStepIcon-completed": { color: "white" },
   },
   buttons: {
     display: "flex",
@@ -91,8 +82,6 @@ const getStepContent = (step) => {
   }
 };
 
-
-
 const RegForm = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -108,12 +97,7 @@ const RegForm = () => {
 
   return (
     <React.Fragment>
-      <Grid
-        container
-        justify="center"
-        alignItems="center"
-        className={classes.root}
-      >
+      <Grid container justify="center" alignItems="center">
         <NavBar />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
@@ -148,12 +132,16 @@ const RegForm = () => {
                     <Button
                       variant="contained"
                       color="default"
-                        onClick={steps.length - 1 === activeStep ?  () => {
-                        history.push("/")
-                      }:handleNext}
+                      onClick={
+                        steps.length - 1 === activeStep
+                          ? () => {
+                              history.push("/");
+                            }
+                          : handleNext
+                      }
                       className={classes.button}
                     >
-                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
                     </Button>
                   </div>
                 </React.Fragment>

@@ -14,8 +14,7 @@ import logo from "../images/new-logo2.png";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     fontFamily: "Roboto",
-    backgroundColor: "#F2F2F2",
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    backgroundColor: "#ef101a",
   },
   toolbar: {
     flexWrap: "wrap",
@@ -24,13 +23,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   link: {
-    color: "#0D0D0D",
+    color: "white",
     textTransform: "uppercase",
     margin: theme.spacing(1, 1.5),
     textDecoration: "none",
     "&:hover": {
       paddingBottom: "3px",
-      borderBottom: "2px solid #F20505",
+      borderBottom: "2px solid #0D0D0D",
     },
   },
   logoProp: {
@@ -45,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
       fontSize: theme.spacing(3.5),
     },
   },
+  loginBtn: {
+    borderColor: "white",
+  },
 }));
 
 export default function Pricing() {
@@ -53,9 +55,9 @@ export default function Pricing() {
   return (
     <React.Fragment>
       <AppBar
-        position="static"
+        position="sticky"
         color="default"
-        elevation={5}
+        elevation={3}
         className={classes.appBar}
       >
         <Toolbar className={classes.toolbar}>
@@ -71,23 +73,12 @@ export default function Pricing() {
           </Typography>
           <nav>
             <Hidden only="xs">
-              <Link
-                to="/find-donor"
-                variant="button"
-                color="textPrimary"
-                className={classes.link}
-              >
+              <Link to="/find-donor" className={classes.link}>
                 Find Donor
               </Link>
-              <Link
-                to="/registration"
-                variant="button"
-                color="textPrimary"
-                className={classes.link}
-              >
+              <Link to="/registration" className={classes.link}>
                 Become A Donor
               </Link>
-
               <Link to="/signin" className={classes.link}>
                 Login
               </Link>

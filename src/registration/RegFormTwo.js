@@ -10,11 +10,9 @@ import {
   makeStyles,
 } from "@material-ui/core";
 
-
-
 const useStyles = makeStyles((theme) => ({
   whiteColor: {
-    color:"white"
+    color: "white",
   },
   textfield: {
     "& .MuiOutlinedInput-input": {
@@ -39,14 +37,13 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiSelect-iconOutlined": { color: "white" },
     "& .MuiSelect-outlined": {
       color: "white",
-       border: "1px solid white",   
+      border: "1px solid white",
     },
   },
 }));
 
 const RegFormTwo = (props) => {
-  
-    const classes = useStyles();
+  const classes = useStyles();
   const gender = ["Male", "Female", "Other"];
   const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
   const occupation = [
@@ -59,7 +56,6 @@ const RegFormTwo = (props) => {
     "Retired",
     "Other",
   ];
-
 
   const [gen, setGender] = useState("");
   const [bg, setBloodGroup] = useState("");
@@ -79,8 +75,6 @@ const RegFormTwo = (props) => {
   const handleChangeOccupation = (event) => {
     setOccupation(event.target.value);
   };
-
-
 
   return (
     <React.Fragment>
@@ -175,7 +169,6 @@ const RegFormTwo = (props) => {
             value={gen}
             onChange={handleChangeGender}
             className={classes.selectbox}
-            
           >
             <MenuItem value="" disabled>
               Gender
@@ -250,7 +243,7 @@ const RegFormTwo = (props) => {
             label="Kidneys"
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3}>
           <FormControlLabel
             control={
               <Checkbox color="default" className={classes.whiteColor} />

@@ -2,8 +2,6 @@ import React from "react";
 import {
   Card,
   Grid,
-  Button,
-  CardActions,
   CardContent,
   CardMedia,
   makeStyles,
@@ -34,34 +32,23 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "white",
   },
 }));
-const NewsCard = (props) => {
+const ProcessCard = (props) => {
   const classes = useStyles();
 
   return (
     <React.Fragment>
       <Grid container className={classes.cardGrid}>
         <Card className={classes.card}>
-          <CardMedia
-            className={classes.cardMedia}
-            image="https://source.unsplash.com/random"
-          />
+          <CardMedia className={classes.cardMedia} image={props.img} />
           <CardContent className={classes.cardContent}>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h4">
               {props.heading}
             </Typography>
-            <Typography>
-              This is a media card. You can use this section to describe the
-              content.
-            </Typography>
+            <Typography>{props.body}</Typography>
           </CardContent>
-          <CardActions>
-            <Button variant="outlined" size="small" className={classes.btn}>
-              View full news
-            </Button>
-          </CardActions>
         </Card>
       </Grid>
     </React.Fragment>
   );
 };
-export default NewsCard;
+export default ProcessCard;
