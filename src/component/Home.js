@@ -51,11 +51,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(4),
   },
   Text2: {
-    fontSize: "5.5em",
+    fontSize: "4.5em",
     textTransform: "uppercase",
     marginBottom: theme.spacing(-6),
   },
-  Text3: { fontSize: "8em", fontWeight: "bold", textTransform: "uppercase" },
+  Text3: { fontSize: "6.5em", fontWeight: "bold", textTransform: "uppercase" },
 
   middleHeading: {
     color: "black",

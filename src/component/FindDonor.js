@@ -1,5 +1,7 @@
 import React from "react";
 import NavBar from "../container/NavBar";
+
+import midImage from "../images/mid.png";
 import {
   makeStyles,
   Card,
@@ -65,6 +67,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     color: "white",
   },
+  midImage: {
+    height: "4vh",
+    marginTop: theme.spacing(-3),
+  },
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -86,6 +92,9 @@ const FindDonor = () => {
             {/* End hero unit */}
             <Typography variant="h4" align="center" className={classes.heading}>
               Find Blood Donor
+            </Typography>
+            <Typography align="center" className={classes.midImage}>
+              <img src={midImage} alt="middleInage" />
             </Typography>
             <Typography className={classes.heading}>
               <Cities />
