@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import csc from "country-state-city";
-import { Grid, Select, MenuItem, Button } from "@material-ui/core";
+import { Grid, makeStyles, Select, MenuItem, Button } from "@material-ui/core";
+const useStyles = makeStyles((theme) => ({
+  searchBtn: {
+    color: "white",
+
+    backgroundColor: "#b40008",
+
+    "&:hover": {
+      backgroundColor: "#ef101a",
+    },
+  },
+}));
 
 const Cities = () => {
   const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
+  const classes = useStyles();
   const stateList = csc.getStatesOfCountry("101");
 
   const [state, setState] = useState("");
@@ -87,7 +99,9 @@ const Cities = () => {
           </Select>
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
-          <Button variant="outlined">SEARCH</Button>
+          <Button variant="outlined" className={classes.searchBtn}>
+            SEARCH
+          </Button>
         </Grid>
       </Grid>
     </>

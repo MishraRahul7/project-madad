@@ -28,7 +28,11 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   heading: {
-    margin: theme.spacing(0, 0, 4),
+    margin: theme.spacing(0, 0, 2),
+  },
+  midImage: {
+    height: "4vh",
+    marginBottom: theme.spacing(4),
   },
   icon: {
     marginRight: theme.spacing(2),
@@ -67,10 +71,6 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     color: "white",
   },
-  midImage: {
-    height: "4vh",
-    marginTop: theme.spacing(-3),
-  },
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -89,16 +89,17 @@ const FindDonor = () => {
         <NavBar />
         <Grid item xs={12} md={10}>
           <Container className={classes.cardGrid}>
-            {/* End hero unit */}
             <Typography variant="h4" align="center" className={classes.heading}>
               Find Blood Donor
             </Typography>
-            <Typography align="center" className={classes.midImage}>
-              <img src={midImage} alt="middleInage" />
+            <Typography align="center">
+              <img
+                src={midImage}
+                className={classes.midImage}
+                alt="middleInage"
+              />
             </Typography>
-            <Typography className={classes.heading}>
-              <Cities />
-            </Typography>
+            <Cities />
             <Grid container spacing={4}>
               {cards.map((card) => (
                 <Grid item key={card} xs={12} sm={6} md={3}>
