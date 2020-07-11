@@ -12,7 +12,7 @@ import {
 import { useHistory } from "react-router-dom";
 import RegFormTwo from "./RegFormTwo";
 import RegFormThree from "./RegFormThree";
-import NavBar from "../container/NavBar";
+import NavBar from "../../container/NavBar";
 import RegFormReview from "./RegFormReview";
 
 const useStyles = makeStyles((theme) => ({

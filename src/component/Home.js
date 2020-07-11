@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Grid, Typography, Link } from "@material-ui/core";
+import { makeStyles, Grid, Typography, Card, Link } from "@material-ui/core";
 
 import NavBar from "../container/NavBar";
 import NewsCard from "../container/NewsCard";
@@ -42,20 +42,22 @@ const useStyles = makeStyles((theme) => ({
   headerTextDiv: {
     color: "white",
     width: "50vw",
+    backgroundColor: "transparent",
+    maxHeight: "50vh",
     textAlign: "center",
     margin: theme.spacing(20, 0, 0, 10),
     padding: "20px",
   },
   Text1: {
-    fontSize: "3em",
+    fontSize: "2.5em",
     marginBottom: theme.spacing(4),
   },
   Text2: {
-    fontSize: "4.5em",
+    fontSize: "4em",
     textTransform: "uppercase",
-    marginBottom: theme.spacing(-6),
+    marginBottom: theme.spacing(-5),
   },
-  Text3: { fontSize: "6.5em", fontWeight: "bold", textTransform: "uppercase" },
+  Text3: { fontSize: "6em", fontWeight: "bold", textTransform: "uppercase" },
 
   middleHeading: {
     color: "black",
@@ -90,7 +92,7 @@ const Home = () => {
         <NavBar />
         {/*Middle*/}
         <Grid item xs={12} className={classes.headerImage}>
-          <div className={classes.headerTextDiv}>
+          <Card elevation={0} className={classes.headerTextDiv}>
             <Typography className={classes.Text1}>
               The blood you donate gives someone another chance at life.
             </Typography>
@@ -98,7 +100,7 @@ const Home = () => {
               Give the gift of life
             </Typography>
             <Typography className={classes.Text3}>Donate Blood</Typography>
-          </div>
+          </Card>
         </Grid>
         <Grid item xs={12} md={10} className={classes.secondMiddle}>
           <Typography

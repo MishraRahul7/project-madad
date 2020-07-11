@@ -12,7 +12,7 @@ import {
   Container,
   Link,
 } from "@material-ui/core";
-import Cities from "../container/cities";
+import Cities from "../container/StatesAndCities";
 function Copyright() {
   return (
     <Typography variant="body2" align="center">

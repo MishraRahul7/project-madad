@@ -3,17 +3,15 @@ import csc from "country-state-city";
 import { Grid, makeStyles, Select, MenuItem, Button } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   searchBtn: {
-    color: "white",
-
-    backgroundColor: "#b40008",
-
+    color: "#ef101a",
     "&:hover": {
+      color: "white",
       backgroundColor: "#ef101a",
     },
   },
 }));
 
-const Cities = () => {
+const StatesAndCities = () => {
   const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
   const classes = useStyles();
   const stateList = csc.getStatesOfCountry("101");
@@ -107,4 +105,4 @@ const Cities = () => {
     </>
   );
 };
-export default Cities;
+export default StatesAndCities;
