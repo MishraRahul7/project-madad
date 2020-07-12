@@ -13,6 +13,12 @@ import googleIcon from "@iconify/icons-mdi/google";
 import facebookIcon from "@iconify/icons-mdi/facebook";
 
 import NavBar from "../container/NavBar";
+import useFormValidation from "../container/useFormValidation";
+const INITIAL_STATE = {
+  email: "",
+  password: "",
+};
+
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     height: "100vh",
@@ -62,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  text: {
+    textDecoration: "none",
+  },
   socialLoginButton: {
     color: "white",
     borderColor: "white",
@@ -70,7 +79,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = () => {
+  const { handleChange, values } = useFormValidation(INITIAL_STATE);
   const classes = useStyles();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("authenticated", values.email, values.password);
+  };
 
   return (
     <div className={classes.mainContainer}>
@@ -81,52 +96,53 @@ const SignIn = () => {
             <Typography component="h1" className={classes.signInHead}>
               Sign In With
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container direction="row" spacing={2}>
                 <Grid item xs={12} md={6} align="right">
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    fullWidth
-                    className={classes.socialLoginButton}
-                  >
-                    <Link to="/" variant="body2">
+                  <Link href="/" className={classes.text} variant="body2">
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      fullWidth
+                      className={classes.socialLoginButton}
+                    >
                       <Icon
                         height="2em"
                         className={classes.icons}
                         icon={facebookIcon}
                       />
-                    </Link>
-                    Facebook
-                  </Button>
+                      Facebook
+                    </Button>
+                  </Link>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <Button
-                    variant="outlined"
-                    size="large"
-                    fullWidth
-                    className={classes.socialLoginButton}
-                  >
-                    <Link to="/" variant="body2">
+                  <Link href="/" className={classes.text} variant="body2">
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      fullWidth
+                      className={classes.socialLoginButton}
+                    >
                       <Icon
                         height="2em"
                         className={classes.icons}
                         icon={googleIcon}
                       />
-                    </Link>
-                    Google
-                  </Button>
+                      Google
+                    </Button>
+                  </Link>
                 </Grid>
                 <Grid item xs={12} md={12}>
                   <TextField
                     variant="outlined"
-                    required
                     fullWidth
                     color="default"
-                    id="email"
                     label="Email Address"
                     name="email"
+                    id="email"
                     autoComplete="off"
+                    onChange={handleChange}
+                    value={values.email}
                     InputLabelProps={{
                       style: { color: "white" },
                     }}
@@ -140,8 +156,10 @@ const SignIn = () => {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
                     id="password"
+                    type="password"
+                    value={values.password}
+                    onChange={handleChange}
                     autoComplete="current-password"
                     InputLabelProps={{
                       style: { color: "white" },
