@@ -24,6 +24,7 @@ const INITIAL_STATE = {
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     height: "100vh",
+    color: "black",
   },
   paper: {
     backgroundColor: "#b40008",

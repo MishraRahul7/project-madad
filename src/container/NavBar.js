@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     "&:hover": {
       paddingBottom: "3px",
-      borderBottom: "2px solid #0D0D0D",
+      borderBottom: "2px solid white",
     },
   },
   logoProp: {

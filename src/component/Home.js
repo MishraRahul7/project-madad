@@ -5,7 +5,7 @@ import NavBar from "../container/NavBar";
 import NewsCard from "../container/NewsCard";
 import ProcessCard from "../container/ProcessCard";
 
-import HeaderImage from "../images/headerImage3.jpg";
+import HeaderImage from "../images/headerImage1.png";
 import midImage from "../images/mid.png";
 
 function Copyright() {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   headerTextDiv: {
-    color: "white",
+    color: "#ef101a",
     width: "50vw",
     backgroundColor: "transparent",
     maxHeight: "50vh",
