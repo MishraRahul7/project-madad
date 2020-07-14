@@ -22,6 +22,7 @@ const INITIAL_STATE = {
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     height: "100vh",
+    color: "black",
   },
   paper: {
     backgroundColor: "#b40008",
@@ -152,7 +153,6 @@ const SignIn = () => {
                 <Grid item xs={12} md={12}>
                   <TextField
                     variant="outlined"
-                    required
                     fullWidth
                     name="password"
                     label="Password"
