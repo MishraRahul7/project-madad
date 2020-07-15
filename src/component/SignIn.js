@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   makeStyles,
   Typography,
@@ -7,6 +6,7 @@ import {
   TextField,
   Button,
   Paper,
+  Link,
 } from "@material-ui/core";
 import { Icon } from "@iconify/react";
 import googleIcon from "@iconify/icons-mdi/google";
@@ -14,6 +14,8 @@ import facebookIcon from "@iconify/icons-mdi/facebook";
 
 import NavBar from "../container/NavBar";
 import useFormValidation from "../container/useFormValidation";
+import validateAuth from "../container/validateAuth";
+
 const INITIAL_STATE = {
   email: "",
   password: "",
@@ -80,13 +82,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = () => {
-  const { handleChange, values } = useFormValidation(INITIAL_STATE);
+  const {
+    handleSubmit,
+    handleChange,
+    habndleBlur,
+    values,
+    errors,
+    isSubmitting,
+  } = useFormValidation(INITIAL_STATE, validateAuth);
   const classes = useStyles();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("authenticated", values.email, values.password);
-  };
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
   return (
     <div className={classes.mainContainer}>
@@ -135,15 +142,16 @@ const SignIn = () => {
                 </Grid>
                 <Grid item xs={12} md={12}>
                   <TextField
+                    name="email"
                     variant="outlined"
                     fullWidth
-                    color="default"
                     label="Email Address"
-                    name="email"
-                    id="email"
+                    type="text"
                     autoComplete="off"
-                    onChange={handleChange}
                     value={values.email}
+                    onChange={handleChange}
+                    onBlur={habndleBlur}
+                    helperText={errors.email}
                     InputLabelProps={{
                       style: { color: "white" },
                     }}
@@ -156,11 +164,11 @@ const SignIn = () => {
                     fullWidth
                     name="password"
                     label="Password"
-                    id="password"
                     type="password"
                     value={values.password}
                     onChange={handleChange}
-                    autoComplete="current-password"
+                    autoComplete="off"
+                    helperText={errors.password}
                     InputLabelProps={{
                       style: { color: "white" },
                     }}
@@ -174,6 +182,7 @@ const SignIn = () => {
                     size="large"
                     variant="contained"
                     color="default"
+                    disabled={isSubmitting}
                     className={classes.signInBtn}
                   >
                     Sign In
