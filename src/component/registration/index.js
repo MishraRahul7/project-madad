@@ -18,7 +18,6 @@ import RegFormReview from "./RegFormReview";
 const useStyles = makeStyles((theme) => ({
   layout: {
     width: "auto",
-    color: "white",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
@@ -28,8 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
-    backgroundColor: "#b40008",
-    color: "white",
+    border: "1px solid black",
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
@@ -40,16 +38,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   stepper: {
-    backgroundColor: "#b40008",
     padding: theme.spacing(3, 0, 5),
-    "& .MuiStepLabel-active": {
-      color: "white",
-    },
-    "& .MuiStepLabel-completed": {
-      color: "white",
-    },
-    "& .MuiStepIcon-active": { color: "white" },
-    "& .MuiStepIcon-completed": { color: "white" },
+    "& .MuiStepIcon-active": { color: "black" },
+    "& .MuiStepIcon-completed": { color: "gray" },
   },
   buttons: {
     display: "flex",
@@ -100,7 +91,7 @@ const RegForm = () => {
       <Grid container justify="center" alignItems="center">
         <NavBar />
         <main className={classes.layout}>
-          <Paper className={classes.paper}>
+          <Paper elevation="5" className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
               Registration
             </Typography>

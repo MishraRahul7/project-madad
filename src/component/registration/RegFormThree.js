@@ -1,38 +1,12 @@
 import React from "react";
-import { Typography, Grid, TextField, makeStyles } from "@material-ui/core";
+// import csc from "country-state-city";
+import { Typography, Grid, TextField } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  tColor: {
-    color: "white",
-  },
-  input: {
-    "&::placeholder": {
-      color: "white",
-    },
-  },
-  notchedOutline: {
-    borderWidth: "1px",
-    borderColor: "White !important",
-  },
-  textfield: {
-    "& .MuiOutlinedInput-input": {
-      color: "white",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "white",
-      },
-      "&:hover fieldset": {
-        borderColor: "white",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "white",
-      },
-    },
-  },
-}));
 const RegFormThree = () => {
-  const classes = useStyles();
+  // const stateList = csc.getStatesOfCountry("101");
+  // const [state, setState] = useState("");
+  // const [city, setCity] = useState("");
+
   return (
     <React.Fragment>
       <Grid container spacing={2} justify="center" alignItems="center">
@@ -49,9 +23,8 @@ const RegFormThree = () => {
             fullWidth
             variant="outlined"
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
             autoComplete="off"
           />
         </Grid>
@@ -63,9 +36,8 @@ const RegFormThree = () => {
             fullWidth
             variant="outlined"
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
             autoComplete="off"
           />
         </Grid>
@@ -74,26 +46,37 @@ const RegFormThree = () => {
             autoComplete="off"
             id="address1"
             name="address1"
-            label="House Number/Flat Number"
+            label="Address"
             fullWidth
             variant="outlined"
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
           />
         </Grid>
-        <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={6}>
           <TextField
-            id="address2"
-            name="address2"
-            label="Street Address, Landmark"
+            id="state"
+            name="state"
+            label="State"
             fullWidth
             variant="outlined"
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
+            autoComplete="off"
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TextField
+            id="district"
+            name="district"
+            label="District"
+            fullWidth
+            variant="outlined"
+            InputLabelProps={{
+              style: { color: "black" },
+            }}
             autoComplete="off"
           />
         </Grid>
@@ -106,23 +89,8 @@ const RegFormThree = () => {
             fullWidth
             variant="outlined"
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
-            autoComplete="off"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            id="district"
-            name="district"
-            label="District"
-            fullWidth
-            variant="outlined"
-            InputLabelProps={{
-              style: { color: "white" },
-            }}
-            className={classes.textfield}
             autoComplete="off"
           />
         </Grid>
@@ -134,23 +102,8 @@ const RegFormThree = () => {
             fullWidth
             variant="outlined"
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
-            autoComplete="off"
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            id="state"
-            name="state"
-            label="State"
-            fullWidth
-            variant="outlined"
-            InputLabelProps={{
-              style: { color: "white" },
-            }}
-            className={classes.textfield}
             autoComplete="off"
           />
         </Grid>
