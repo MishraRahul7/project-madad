@@ -42,7 +42,6 @@ const StatesAndCities = () => {
             displayEmpty
             variant="outlined"
             labelId="demo-simple-select-label"
-            id="gender"
             value={state}
             onChange={handleChaangeState}
           >

@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
-    border: "1px solid black",
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
+    borderRadius: "10px",
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
@@ -91,7 +91,7 @@ const RegForm = () => {
       <Grid container justify="center" alignItems="center">
         <NavBar />
         <main className={classes.layout}>
-          <Paper elevation="5" className={classes.paper}>
+          <Paper elevation={5} className={classes.paper}>
             <Typography component="h1" variant="h4" align="center">
               Registration
             </Typography>

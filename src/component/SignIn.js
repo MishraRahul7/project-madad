@@ -24,13 +24,11 @@ const INITIAL_STATE = {
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     height: "100vh",
-    color: "black",
   },
   paper: {
-    backgroundColor: "#b40008",
     display: "flex",
     padding: "30px",
-    margin: "2em 0em 2em 0em",
+    marginTop: theme.spacing(6),
     borderRadius: "10px",
     flexDirection: "column",
     alignItems: "center",
@@ -44,40 +42,32 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   signInBtn: {
-    margin: theme.spacing(1, 0, 0),
+    color: "white",
+    backgroundColor: "#ac1c14",
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(0),
+    "&:hover": {
+      backgroundColor: "#ac1c14",
+    },
   },
   signInHead: {
-    color: "white",
     fontSize: "2rem",
   },
-  signUpLink: { fontFamily: "Roboto", textDecoration: "none", color: "white" },
+  signUpLink: { fontFamily: "Roboto", textDecoration: "none", color: "black" },
   icons: {
     paddingRight: "0.5em",
-    color: "white",
-  },
-  root: {
-    "& .MuiOutlinedInput-input": {
-      color: "white",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "white",
-      },
-      "&:hover fieldset": {
-        borderColor: "white",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "white",
-      },
-    },
-  },
-  text: {
-    textDecoration: "none",
+    color: "#ac1c14",
   },
   socialLoginButton: {
-    color: "white",
-    borderColor: "white",
+    color: "#ac1c14",
+    borderColor: "#ac1c14",
     marginBottom: theme.spacing(1),
+  },
+  text: {
+    "&:hover": {
+      color: "white",
+      textDecoration: "none",
+    },
   },
 }));
 
@@ -92,15 +82,12 @@ const SignIn = () => {
   } = useFormValidation(INITIAL_STATE, validateAuth);
   const classes = useStyles();
 
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-
   return (
     <div className={classes.mainContainer}>
       <NavBar />
       <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs={12} md={4}>
-          <Paper className={classes.paper}>
+          <Paper elevation={5} className={classes.paper}>
             <Typography component="h1" className={classes.signInHead}>
               Sign In With
             </Typography>
@@ -153,7 +140,7 @@ const SignIn = () => {
                     onBlur={habndleBlur}
                     helperText={errors.email}
                     InputLabelProps={{
-                      style: { color: "white" },
+                      style: { color: "black" },
                     }}
                     className={classes.root}
                   />
@@ -170,7 +157,7 @@ const SignIn = () => {
                     autoComplete="off"
                     helperText={errors.password}
                     InputLabelProps={{
-                      style: { color: "white" },
+                      style: { color: "black" },
                     }}
                     className={classes.root}
                   />

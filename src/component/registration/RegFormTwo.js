@@ -7,7 +7,29 @@ import {
   MenuItem,
 } from "@material-ui/core";
 
+// import useFormValidation from "../container/useFormValidation";
+// import validateAuth from "../container/validateAuth";
+
+// const INITIAL_STATE = {
+//   fname: "",
+//   lname: "",
+//   ftrname: "",
+//   dob: "",
+//   age: "",
+//   gender: "",
+//   occupation: "",
+//   bgroup: "",
+// };
 const RegFormTwo = (props) => {
+  // const {
+  //   handleSubmit,
+  //   handleChange,
+  //   habndleBlur,
+  //   values,
+  //   errors,
+  //   isSubmitting,
+  // } = useFormValidation(INITIAL_STATE, validateAuth);
+
   const gender = ["Male", "Female", "Other"];
   const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
   const occupation = [
@@ -45,9 +67,11 @@ const RegFormTwo = (props) => {
       <Typography variant="h6" gutterBottom>
         Personal Details
       </Typography>
+      {/* <form onSubmit={handleSubmit}> */}
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
+            name="fname"
             id="custom-css-outlined-input"
             label="First Name"
             fullWidth
@@ -62,8 +86,8 @@ const RegFormTwo = (props) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            name="lname"
             id="lastName"
-            name="lastName"
             label="Last Name"
             variant="outlined"
             fullWidth
@@ -77,8 +101,8 @@ const RegFormTwo = (props) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
+            name="ftrname"
             id="fatherName"
-            name="fatherName"
             label="Father's name"
             variant="outlined"
             fullWidth
@@ -122,6 +146,7 @@ const RegFormTwo = (props) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Select
+            name="gender"
             displayEmpty
             fullWidth
             variant="outlined"
@@ -140,6 +165,7 @@ const RegFormTwo = (props) => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Select
+            name="occupation"
             fullWidth
             value={ocu}
             displayEmpty
@@ -158,6 +184,7 @@ const RegFormTwo = (props) => {
         </Grid>{" "}
         <Grid item xs={12} sm={6}>
           <Select
+            name="bgroup"
             fullWidth
             displayEmpty
             variant="outlined"
@@ -177,6 +204,7 @@ const RegFormTwo = (props) => {
           </Select>
         </Grid>
       </Grid>
+      {/* </form> */}
     </React.Fragment>
   );
 };
