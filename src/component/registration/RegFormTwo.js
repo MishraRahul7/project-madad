@@ -5,45 +5,9 @@ import {
   TextField,
   Select,
   MenuItem,
-  FormControlLabel,
-  Checkbox,
-  makeStyles,
 } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  whiteColor: {
-    color: "white",
-  },
-  textfield: {
-    "& .MuiOutlinedInput-input": {
-      color: "white",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "white",
-      },
-      "&:hover fieldset": {
-        borderColor: "white",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "white",
-      },
-    },
-  },
-  selectbox: {
-    "& .MuiSelect-select": {
-      color: "white",
-    },
-    "& .MuiSelect-iconOutlined": { color: "white" },
-    "& .MuiSelect-outlined": {
-      color: "white",
-      border: "1px solid white",
-    },
-  },
-}));
-
 const RegFormTwo = (props) => {
-  const classes = useStyles();
   const gender = ["Male", "Female", "Other"];
   const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
   const occupation = [
@@ -92,9 +56,8 @@ const RegFormTwo = (props) => {
             value={state.firstname}
             onChange={handleChangeState}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -108,9 +71,8 @@ const RegFormTwo = (props) => {
             value={state.lastname}
             onChange={handleChangeState}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -124,9 +86,8 @@ const RegFormTwo = (props) => {
             value={state.fatherName}
             onChange={handleChangeState}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -140,9 +101,8 @@ const RegFormTwo = (props) => {
             value={state.dob}
             onChange={handleChangeState}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -156,9 +116,8 @@ const RegFormTwo = (props) => {
             value={state.age}
             onChange={handleChangeState}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "black" },
             }}
-            className={classes.textfield}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -168,7 +127,6 @@ const RegFormTwo = (props) => {
             variant="outlined"
             value={gen}
             onChange={handleChangeGender}
-            className={classes.selectbox}
           >
             <MenuItem value="" disabled>
               Gender
@@ -187,7 +145,6 @@ const RegFormTwo = (props) => {
             displayEmpty
             variant="outlined"
             onChange={handleChangeOccupation}
-            className={classes.selectbox}
           >
             <MenuItem value="" disabled>
               Occupation
@@ -208,7 +165,6 @@ const RegFormTwo = (props) => {
             id="bloodgroup"
             value={bg}
             onChange={handleChangeBG}
-            className={classes.selectbox}
           >
             <MenuItem value="" disabled>
               Blood Group
@@ -219,69 +175,6 @@ const RegFormTwo = (props) => {
               </MenuItem>
             ))}
           </Select>
-        </Grid>
-        <Grid item xs={12} md={12} sm={12}>
-          <Typography>Organs that I wish to donate</Typography>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="Heart"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="Corneas (Eyes)"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="Kidneys"
-          />
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="Liver"
-          />{" "}
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="Pancreas"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="Skin"
-          />{" "}
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="Lungs"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="Small Intestine"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox color="default" className={classes.whiteColor} />
-            }
-            label="All Organs"
-          />{" "}
         </Grid>
       </Grid>
     </React.Fragment>
