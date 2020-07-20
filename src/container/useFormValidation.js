@@ -20,6 +20,7 @@ const useFormValidation = (initialState, validate) => {
       ...values,
       [event.target.name]: event.target.value,
     });
+    console.log(values);
   }
 
   function habndleBlur() {
@@ -29,6 +30,7 @@ const useFormValidation = (initialState, validate) => {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     const validationErrors = validate(values);
     setErrors(validationErrors);
     setSubmitting(true);
