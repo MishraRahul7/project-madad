@@ -13,13 +13,6 @@ import googleIcon from "@iconify/icons-mdi/google";
 import facebookIcon from "@iconify/icons-mdi/facebook";
 
 import NavBar from "../container/NavBar";
-import useFormValidation from "../container/useFormValidation";
-import validateAuth from "../container/validateAuth";
-
-const INITIAL_STATE = {
-  email: "",
-  password: "",
-};
 
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
@@ -72,14 +65,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = () => {
-  const {
-    handleSubmit,
-    handleChange,
-    habndleBlur,
-    values,
-    errors,
-    isSubmitting,
-  } = useFormValidation(INITIAL_STATE, validateAuth);
   const classes = useStyles();
 
   return (
@@ -91,7 +76,7 @@ const SignIn = () => {
             <Typography component="h1" className={classes.signInHead}>
               Sign In With
             </Typography>
-            <form className={classes.form} onSubmit={handleSubmit}>
+            <form className={classes.form}>
               <Grid container direction="row" spacing={2}>
                 <Grid item xs={12} md={6} align="right">
                   <Link href="/" className={classes.text} variant="body2">
@@ -135,10 +120,6 @@ const SignIn = () => {
                     label="Email Address"
                     type="text"
                     autoComplete="off"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={habndleBlur}
-                    helperText={errors.email}
                     InputLabelProps={{
                       style: { color: "black" },
                     }}
@@ -152,10 +133,6 @@ const SignIn = () => {
                     name="password"
                     label="Password"
                     type="password"
-                    value={values.password}
-                    onChange={handleChange}
-                    autoComplete="off"
-                    helperText={errors.password}
                     InputLabelProps={{
                       style: { color: "black" },
                     }}
@@ -169,7 +146,6 @@ const SignIn = () => {
                     size="large"
                     variant="contained"
                     color="default"
-                    disabled={isSubmitting}
                     className={classes.signInBtn}
                   >
                     Sign In
