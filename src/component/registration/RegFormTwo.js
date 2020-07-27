@@ -23,7 +23,6 @@ const PersonalDetailsSchema = Yup.object().shape({
     .max(70, "Too Long!")
     .required("Required"),
   dob: Yup.date().required("Required"),
-  gender: Yup.string().required("Required"),
 });
 
 const RegFormTwo = (props) => {
@@ -137,13 +136,11 @@ const RegFormTwo = (props) => {
                 <Field
                   component={Select}
                   name="gender"
-                  displayEmpty
                   fullWidth
+                  displayEmpty
                   variant="outlined"
                 >
-                  <MenuItem value="" disabled>
-                    Gender
-                  </MenuItem>
+                  <MenuItem disabled>Gender</MenuItem>
                   {gender.map((val) => (
                     <MenuItem key={val} value={val}>
                       {val}
@@ -159,9 +156,7 @@ const RegFormTwo = (props) => {
                   displayEmpty
                   variant="outlined"
                 >
-                  <MenuItem value="" disabled>
-                    Occupation
-                  </MenuItem>
+                  <MenuItem disabled>Occupation</MenuItem>
                   {occupation.map((val) => (
                     <MenuItem key={val} value={val}>
                       {val}
@@ -179,9 +174,7 @@ const RegFormTwo = (props) => {
                   labelId="bloodgroup"
                   id="bloodgroup"
                 >
-                  <MenuItem value="" disabled>
-                    Blood Group
-                  </MenuItem>
+                  <MenuItem disabled>Blood Group</MenuItem>
                   {BloodGroup.map((val) => (
                     <MenuItem key={val} value={val}>
                       {val}
