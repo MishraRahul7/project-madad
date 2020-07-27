@@ -93,11 +93,11 @@ const SignIn = () => {
               }}
               validationSchema={SignInSchema}
               onSubmit={(values) => {
-                dispatch(signIn(values));
+                dispatch(values);
               }}
             >
               {({ errors, handleChange, touched }) => (
-                <Form className={classes.form}>
+                <form className={classes.form}>
                   <Grid container direction="row" spacing={2}>
                     <Grid item xs={12} md={6} align="right">
                       <Link href="/" className={classes.text} variant="body2">
@@ -187,7 +187,7 @@ const SignIn = () => {
                       </Link>
                     </Grid>
                   </Grid>
-                </Form>
+                </form>
               )}
             </Formik>
           </Paper>
