@@ -13,9 +13,10 @@ import facebookIcon from "@iconify/icons-mdi/facebook";
 import { Formik } from "formik";
 import { TextField } from "formik-material-ui";
 import * as Yup from "yup";
+import { signIn } from "../actions";
 
 import NavBar from "../container/NavBar";
-
+console.log(signIn);
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email().required("This field is required"),
   password: Yup.string()
@@ -93,7 +94,7 @@ const SignIn = () => {
               }}
               validationSchema={SignInSchema}
               onSubmit={(values) => {
-                dispatch(values);
+                dispatch(signIn(values));
               }}
             >
               {({ errors, handleChange, touched }) => (
