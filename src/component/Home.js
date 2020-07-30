@@ -1,7 +1,5 @@
 import React from "react";
 import { makeStyles, Grid, Typography, Card, Link } from "@material-ui/core";
-
-import NavBar from "../container/NavBar";
 import NewsCard from "../container/NewsCard";
 import ProcessCard from "../container/ProcessCard";
 
@@ -89,7 +87,6 @@ const Home = () => {
         alignItems="center"
         className={classes.root}
       >
-        <NavBar />
         {/*Middle*/}
         <Grid item xs={12} className={classes.headerImage}>
           <Card elevation={0} className={classes.headerTextDiv}>

@@ -1,22 +1,22 @@
-import React, { useDispatch } from "react";
+import React from "react";
+import { useDispatch } from "react-redux";
 import {
   makeStyles,
   Typography,
   Grid,
   Button,
+  TextField,
   Paper,
   Link,
 } from "@material-ui/core";
 import { Icon } from "@iconify/react";
 import googleIcon from "@iconify/icons-mdi/google";
 import facebookIcon from "@iconify/icons-mdi/facebook";
-import { Formik } from "formik";
-import { TextField } from "formik-material-ui";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { signIn } from "../actions";
-
 import NavBar from "../container/NavBar";
-console.log(signIn);
+
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email().required("This field is required"),
   password: Yup.string()
@@ -98,7 +98,7 @@ const SignIn = () => {
               }}
             >
               {({ errors, handleChange, touched }) => (
-                <form className={classes.form}>
+                <Form className={classes.form}>
                   <Grid container direction="row" spacing={2}>
                     <Grid item xs={12} md={6} align="right">
                       <Link href="/" className={classes.text} variant="body2">
@@ -142,6 +142,11 @@ const SignIn = () => {
                         label="Email Address"
                         type="text"
                         autoComplete="off"
+                        onChange={handleChange}
+                        error={errors.email && touched.email}
+                        helperText={
+                          errors.email && touched.email ? errors.email : null
+                        }
                         InputLabelProps={{
                           style: { color: "black" },
                         }}
@@ -155,6 +160,13 @@ const SignIn = () => {
                         name="password"
                         label="Password"
                         type="password"
+                        onChange={handleChange}
+                        error={errors.password && touched.password}
+                        helperText={
+                          errors.password && touched.password
+                            ? errors.password
+                            : null
+                        }
                         InputLabelProps={{
                           style: { color: "black" },
                         }}
@@ -188,7 +200,7 @@ const SignIn = () => {
                       </Link>
                     </Grid>
                   </Grid>
-                </form>
+                </Form>
               )}
             </Formik>
           </Paper>
