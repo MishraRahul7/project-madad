@@ -15,7 +15,6 @@ import facebookIcon from "@iconify/icons-mdi/facebook";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { signIn } from "../actions";
-import NavBar from "../container/NavBar";
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email().required("This field is required"),
@@ -80,7 +79,6 @@ const SignIn = () => {
 
   return (
     <div className={classes.mainContainer}>
-      <NavBar />
       <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs={12} md={4}>
           <Paper elevation={5} className={classes.paper}>

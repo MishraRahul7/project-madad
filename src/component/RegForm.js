@@ -7,7 +7,6 @@ import {
   Select,
   makeStyles,
   TextField,
-  FormControl,
   Paper,
   Button,
 } from "@material-ui/core";
@@ -277,24 +276,22 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <FormControl>
-                        <Select
-                          id="gender"
-                          error={errors.gender && touched.gender}
-                          onChange={handleChange}
-                          name="gender"
-                          fullWidth
-                          displayEmpty
-                          variant="outlined"
-                        >
-                          <MenuItem disabled>Gender</MenuItem>
-                          {gender.map((val) => (
-                            <MenuItem key={val} value={val}>
-                              {val}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
+                      <Select
+                        id="gender"
+                        error={errors.gender && touched.gender}
+                        onChange={handleChange}
+                        name="gender"
+                        fullWidth
+                        displayEmpty
+                        variant="outlined"
+                      >
+                        <MenuItem disabled>Gender</MenuItem>
+                        {gender.map((val) => (
+                          <MenuItem key={val} value={val}>
+                            {val}
+                          </MenuItem>
+                        ))}
+                      </Select>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Select
@@ -454,7 +451,7 @@ const RegForm = (props) => {
                         ))}
                       </Select>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={12} style={{ textAlign: "right" }}>
                       <Button
                         className={classes.SubmitButton}
                         size="large"
