@@ -1,19 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Grid,
   Typography,
   MenuItem,
   Select,
   makeStyles,
+  TextField,
+  FormControl,
   Paper,
   Button,
 } from "@material-ui/core";
-import { Formik, Field } from "formik";
-import { TextField } from "formik-material-ui";
+import { Formik } from "formik";
 import { Form } from "formik";
 import * as Yup from "yup";
 import csc from "country-state-city";
-import NavBar from "../container/NavBar";
+import { signUp } from "../actions";
+
 const PersonalDetailsSchema = Yup.object().shape({
   fname: Yup.string()
     .min(2, "Too Short!")
@@ -28,16 +31,29 @@ const PersonalDetailsSchema = Yup.object().shape({
     .max(50, "Too Long!")
     .required("Required"),
   age: Yup.number()
-    .min(2, "Too Short!")
-    .max(70, "Too Long!")
+    .min(17, "You are not eligible")
+    .max(65, "You are not eligible!")
+    .required("Required"),
+  weight: Yup.number()
+    .min(45, "You are not eligible")
+    .max(110, "You are not eligible!")
     .required("Required"),
   dob: Yup.date().required("Required"),
-
-  phone: Yup.number()
-    .min(10, "Too Short!")
-    .max(11, "Too Long!")
-    .required("Required"),
+  gender: Yup.string().required("Required"),
+  occupation: Yup.string().required("Required"),
+  bgroup: Yup.string().required("Required"),
+  address: Yup.string()
+    .required("Required")
+    .max(100, "Too Long")
+    .min(5, "Too short"),
+  state: Yup.string().required("Required"),
+  city: Yup.string().required("Required"),
+  phone: Yup.number().min(10).required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string()
+    .min(6, "Password too short")
+    .max(20, "Password too long")
+    .required("Required"),
   pincode: Yup.number()
     .min(6, "Too Short!")
     .max(7, "Too Long!")
@@ -76,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
 
 const RegForm = (props) => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+
   const gender = ["Male", "Female", "Other"];
   const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
   const occupation = [
@@ -107,10 +126,14 @@ const RegForm = (props) => {
     <React.Fragment>
       {" "}
       <Grid container justify="center" alignItems="center">
-        <NavBar />
         <main className={classes.Reglayout}>
           <Paper elevation={5} className={classes.Regpaper}>
-            <Typography component="h1" variant="h4" align="center">
+            <Typography
+              component="h1"
+              variant="h4"
+              align="center"
+              style={{ paddingBottom: "10px" }}
+            >
               Registration
             </Typography>
             <Formik
@@ -124,21 +147,32 @@ const RegForm = (props) => {
                 email: "",
                 address: "",
                 pincode: "",
+                gender: "",
+                occupation: "",
+                state: "",
+                city: "",
+                bgroup: "",
+                weight: "",
+                password: "",
               }}
               validationSchema={PersonalDetailsSchema}
               onSubmit={(values) => {
-                // same shape as initial values
+                dispatch(signUp(values));
                 console.log(values);
               }}
             >
-              {({ errors, touched }) => (
+              {({ errors, handleChange, touched }) => (
                 <Form>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                      <Field
-                        component={TextField}
+                      <TextField
+                        id="fname"
+                        error={errors.fname && touched.fname}
+                        onChange={handleChange}
+                        helperText={
+                          errors.fname && touched.fname ? errors.fname : null
+                        }
                         name="fname"
-                        id="custom-css-outlined-input"
                         label="First Name"
                         fullWidth
                         variant="outlined"
@@ -149,10 +183,14 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Field
-                        component={TextField}
+                      <TextField
+                        id="lname"
+                        error={errors.lname && touched.lname}
+                        onChange={handleChange}
+                        helperText={
+                          errors.lname && touched.lname ? errors.lname : null
+                        }
                         name="lname"
-                        id="lastName"
                         label="Last Name"
                         variant="outlined"
                         fullWidth
@@ -163,10 +201,16 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Field
-                        component={TextField}
+                      <TextField
+                        id="ftrname"
+                        error={errors.ftrname && touched.ftrname}
+                        onChange={handleChange}
+                        helperText={
+                          errors.ftrname && touched.ftrname
+                            ? errors.ftrname
+                            : null
+                        }
                         name="ftrname"
-                        id="fatherName"
                         label="Father's name"
                         variant="outlined"
                         fullWidth
@@ -177,9 +221,13 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Field
-                        component={TextField}
+                      <TextField
                         id="dob"
+                        error={errors.dob && touched.dob}
+                        onChange={handleChange}
+                        helperText={
+                          errors.dob && touched.dob ? errors.dob : null
+                        }
                         name="dob"
                         type="date"
                         variant="outlined"
@@ -191,9 +239,13 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Field
-                        component={TextField}
+                      <TextField
                         id="age"
+                        error={errors.age && touched.age}
+                        onChange={handleChange}
+                        helperText={
+                          errors.age && touched.age ? errors.age : null
+                        }
                         name="age"
                         label="Age"
                         type="number"
@@ -206,24 +258,50 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Field
-                        component={Select}
-                        name="gender"
-                        fullWidth
-                        displayEmpty
+                      <TextField
+                        id="weight"
+                        error={errors.weight && touched.weight}
+                        onChange={handleChange}
+                        helperText={
+                          errors.weight && touched.weight ? errors.weight : null
+                        }
+                        name="weight"
+                        label="Weight"
+                        type="number"
                         variant="outlined"
-                      >
-                        <MenuItem disabled>Gender</MenuItem>
-                        {gender.map((val) => (
-                          <MenuItem key={val} value={val}>
-                            {val}
-                          </MenuItem>
-                        ))}
-                      </Field>
+                        fullWidth
+                        autoComplete="off"
+                        InputLabelProps={{
+                          style: { color: "black" },
+                        }}
+                      />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Field
+                      <FormControl>
+                        <Select
+                          id="gender"
+                          error={errors.gender && touched.gender}
+                          onChange={handleChange}
+                          name="gender"
+                          fullWidth
+                          displayEmpty
+                          variant="outlined"
+                        >
+                          <MenuItem disabled>Gender</MenuItem>
+                          {gender.map((val) => (
+                            <MenuItem key={val} value={val}>
+                              {val}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <Select
                         component={Select}
+                        id="occupation"
+                        error={errors.occupation && touched.occupation}
+                        onChange={handleChange}
                         name="occupation"
                         fullWidth
                         displayEmpty
@@ -235,17 +313,19 @@ const RegForm = (props) => {
                             {val}
                           </MenuItem>
                         ))}
-                      </Field>
+                      </Select>
                     </Grid>{" "}
                     <Grid item xs={12} sm={6}>
-                      <Field
+                      <Select
                         component={Select}
+                        id="bgroup"
+                        error={errors.bgroup && touched.bgroup}
+                        onChange={handleChange}
                         name="bgroup"
                         fullWidth
                         displayEmpty
                         variant="outlined"
                         labelId="bloodgroup"
-                        id="bloodgroup"
                       >
                         <MenuItem disabled>Blood Group</MenuItem>
                         {BloodGroup.map((val) => (
@@ -253,13 +333,17 @@ const RegForm = (props) => {
                             {val}
                           </MenuItem>
                         ))}
-                      </Field>
+                      </Select>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Field
-                        component={TextField}
+                      <TextField
+                        id="phone"
+                        error={errors.phone && touched.phone}
+                        onChange={handleChange}
+                        helperText={
+                          errors.phone && touched.phone ? errors.phone : null
+                        }
                         name="phone"
-                        id="custom-css-outlined-input"
                         label="Phone"
                         fullWidth
                         variant="outlined"
@@ -270,10 +354,14 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Field
-                        component={TextField}
+                      <TextField
+                        id="email"
+                        error={errors.email && touched.email}
+                        onChange={handleChange}
+                        helperText={
+                          errors.email && touched.email ? errors.email : null
+                        }
                         name="email"
-                        id="custom-css-outlined-input"
                         label="Email"
                         fullWidth
                         variant="outlined"
@@ -283,11 +371,38 @@ const RegForm = (props) => {
                         }}
                       />
                     </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        id="password"
+                        error={errors.password && touched.password}
+                        onChange={handleChange}
+                        helperText={
+                          errors.password && touched.password
+                            ? errors.password
+                            : null
+                        }
+                        name="password"
+                        label="Password"
+                        type="password"
+                        fullWidth
+                        variant="outlined"
+                        autoComplete="off"
+                        InputLabelProps={{
+                          style: { color: "black" },
+                        }}
+                      />
+                    </Grid>
                     <Grid item xs={12} sm={12}>
-                      <Field
-                        component={TextField}
+                      <TextField
+                        id="address"
+                        error={errors.address && touched.address}
+                        onChange={handleChange}
+                        helperText={
+                          errors.address && touched.address
+                            ? errors.address
+                            : null
+                        }
                         name="address"
-                        id="custom-css-outlined-input"
                         label="Address"
                         fullWidth
                         variant="outlined"
@@ -299,6 +414,8 @@ const RegForm = (props) => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Select
+                        id="state"
+                        error={errors.state && touched.state}
                         name="state"
                         fullWidth
                         displayEmpty
@@ -318,6 +435,8 @@ const RegForm = (props) => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Select
+                        id="city"
+                        error={errors.city && touched.city}
                         name="city"
                         fullWidth
                         value={city}
@@ -339,6 +458,7 @@ const RegForm = (props) => {
                       <Button
                         className={classes.SubmitButton}
                         size="large"
+                        type="submit"
                         variant="outlined"
                       >
                         Submit

@@ -1,6 +1,4 @@
 import React from "react";
-import NavBar from "../container/NavBar";
-
 import midImage from "../images/mid.png";
 import {
   makeStyles,
@@ -86,7 +84,6 @@ const FindDonor = () => {
         container
         className={classes.root}
       >
-        <NavBar />
         <Grid item xs={12} md={10}>
           <Container className={classes.cardGrid}>
             <Typography variant="h4" align="center" className={classes.heading}>

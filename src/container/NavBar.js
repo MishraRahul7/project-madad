@@ -5,12 +5,14 @@ import {
   Toolbar,
   makeStyles,
   Hidden,
+  Menu,
+  MenuItem,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import logo from "../images/new-logo2.png";
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     fontFamily: "Roboto",
@@ -32,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
       borderBottom: "2px solid white",
     },
   },
+  link1: {
+    textTransform: "uppercase",
+    margin: theme.spacing(1, 1.5),
+    textDecoration: "none",
+  },
   logoProp: {
     height: "8vh",
   },
@@ -49,8 +56,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Pricing() {
+const NavBar = () => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <React.Fragment>
@@ -73,13 +87,21 @@ export default function Pricing() {
           </Typography>
           <nav>
             <Hidden only="xs">
-              <Link to="/find-donor" className={classes.link}>
+              <Link
+                to="/find-donor"
+                onClick={handleClose}
+                className={classes.link}
+              >
                 Find Donor
               </Link>
-              <Link to="/registration" className={classes.link}>
+              <Link
+                to="/registration"
+                onClick={handleClose}
+                className={classes.link}
+              >
                 Become A Donor
               </Link>
-              <Link to="/signin" className={classes.link}>
+              <Link to="/signin" onClick={handleClose} className={classes.link}>
                 Login
               </Link>
             </Hidden>
@@ -90,12 +112,101 @@ export default function Pricing() {
               className={classes.menuIcon}
               color="inherit"
               aria-label="menu"
+              onClick={handleClick}
             >
               <MenuIcon />
             </IconButton>
           </Hidden>
+          <Menu
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem>
+              <Link
+                to="/find-donor"
+                onClick={handleClose}
+                className={classes.link1}
+              >
+                Find Donor
+              </Link>
+            </MenuItem>
+
+            <MenuItem>
+              <Link
+                to="/registration"
+                onClick={handleClose}
+                className={classes.link1}
+              >
+                Become A Donor
+              </Link>
+            </MenuItem>
+
+            <MenuItem>
+              <Link
+                to="/signin"
+                onClick={handleClose}
+                className={classes.link1}
+              >
+                Login
+              </Link>
+            </MenuItem>
+          </Menu>
+          {/* <Hidden mdUp smUp>
+            <IconButton
+              edge="start"
+              onClick={handleClick}
+              className={classes.menuIcon}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon  />
+            </IconButton>
+          </Hidden>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>
+              <Link to="/" onClick={handleClose} className={classes.link1}>
+                Home
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link
+                to="/find-donor"
+                onClick={handleClose}
+                className={classes.link1}
+              >
+                Find Donor
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link
+                to="/profile"
+                onClick={handleClose}
+                className={classes.link1}
+              >
+                Profile
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Button
+                onClick={() => {
+                  dispatch(signOut());
+                }}
+              >
+                Logout
+              </Button>
+            </MenuItem>
+          </Menu> */}
         </Toolbar>
       </AppBar>
     </React.Fragment>
   );
-}
+};
+export default NavBar;
