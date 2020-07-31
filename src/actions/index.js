@@ -1,32 +1,14 @@
 import {
-<<<<<<< HEAD
-=======
-  // IMAGE_DATA,
->>>>>>> updateCode
   SIGN_IN,
   SIGN_UP,
   SIGN_OUT,
   DELETE_DONOR,
   UPDATE_DONOR,
+  GET_USER,
 } from "./types";
-<<<<<<< HEAD
 import history from "../history";
 import apis from "../apis/apis";
 
-=======
-// import Axios from "axios";
-import history from "../history";
-import apis from "../apis/apis";
-
-// export const imageDataApi = () => async (dispatch) => {
-//   const response = await Axios.get("https://source.unsplash.com/");
-//   dispatch({
-//     type: IMAGE_DATA,
-//     payload: response.data,
-//   });
-// };
-
->>>>>>> updateCode
 export const signUp = (values) => async (dispatch) => {
   let response;
   try {
@@ -39,7 +21,6 @@ export const signUp = (values) => async (dispatch) => {
       payload: response.data,
     });
     history.push("/signin");
-    console.log(history);
   } catch (e) {}
 };
 
@@ -47,7 +28,6 @@ export const signIn = (values) => async (dispatch) => {
   let response;
   try {
     response = await apis.post("/users/login", values);
-
     if (response.status === 200) {
       localStorage.setItem("jwt", response.data.token);
     }
@@ -55,8 +35,22 @@ export const signIn = (values) => async (dispatch) => {
       type: SIGN_IN,
       payload: response.data,
     });
-    history.push("/dashboard");
+    history.push("/profile");
+    console.log("Signed In");
   } catch (e) {}
+};
+
+export const getUser = () => async (dispatch) => {
+  const response = await apis.get(
+    "/users/me",
+    (apis.defaults.headers.common["Authorization"] =
+      "Bearer " + localStorage.getItem("jwt"))
+  );
+  dispatch({
+    type: GET_USER,
+    payload: response.data,
+  });
+  history.push("/profile");
 };
 
 export const signOut = () => async (dispatch) => {
@@ -70,6 +64,7 @@ export const signOut = () => async (dispatch) => {
     type: SIGN_OUT,
   });
   history.push("/");
+  console.log("Logout");
 };
 
 export const deleteUser = () => async (dispatch) => {

@@ -288,24 +288,6 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-<<<<<<< HEAD
-                      <Select
-                        id="gender"
-                        error={errors.gender && touched.gender}
-                        onChange={handleChange}
-                        name="gender"
-                        fullWidth
-                        displayEmpty
-                        variant="outlined"
-                      >
-                        <MenuItem disabled>Gender</MenuItem>
-                        {gender.map((val) => (
-                          <MenuItem key={val} value={val}>
-                            {val}
-                          </MenuItem>
-                        ))}
-                      </Select>
-=======
                       <Field
                         component={Select}
                         onChange={handleChange}
@@ -322,7 +304,6 @@ const RegForm = (props) => {
                         <MenuItem value="Female">Female</MenuItem>
                         <MenuItem value="Other">Other</MenuItem>
                       </Field>
->>>>>>> updateCode
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Field

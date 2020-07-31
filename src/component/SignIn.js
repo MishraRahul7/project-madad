@@ -7,15 +7,8 @@ import {
   Button,
   TextField,
   Paper,
-  Link,
 } from "@material-ui/core";
-<<<<<<< HEAD
-import { Icon } from "@iconify/react";
-import googleIcon from "@iconify/icons-mdi/google";
-import facebookIcon from "@iconify/icons-mdi/facebook";
-=======
 import { Link } from "react-router-dom";
->>>>>>> updateCode
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { signIn } from "../actions";
@@ -29,7 +22,7 @@ const SignInSchema = Yup.object().shape({
 });
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
-    height: "100vh",
+    height: "100%",
   },
   paper: {
     display: "flex",
@@ -38,10 +31,6 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     flexDirection: "column",
     alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -60,21 +49,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2rem",
   },
   signUpLink: { fontFamily: "Roboto", textDecoration: "none", color: "black" },
-  icons: {
-    paddingRight: "0.5em",
-    color: "#ac1c14",
-  },
-  socialLoginButton: {
-    color: "#ac1c14",
-    borderColor: "#ac1c14",
-    marginBottom: theme.spacing(1),
-  },
-  text: {
-    "&:hover": {
-      color: "white",
-      textDecoration: "none",
-    },
-  },
 }));
 
 const SignIn = () => {
