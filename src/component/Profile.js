@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Typography, makeStyles, Paper } from "@material-ui/core";
+
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getUser, deleteUser } from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   Reglayout: {
@@ -32,9 +36,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Profile = (props) => {
+const Profile = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.auth.user);
+  const isSignedIn = useSelector((state) => state.auth.isSignedIn);
 
+  useEffect(() => {
+    if (!isSignedIn) {
+      history.push("/");
+    }
+    if (isSignedIn) {
+      dispatch(getUser());
+    }
+  }, [isSignedIn, history, dispatch]);
+  if (!data) {
+    return <div>Loading...</div>;
+  }
   return (
     <React.Fragment>
       <Grid container justify="center" alignItems="center">
@@ -52,9 +71,7 @@ const Profile = (props) => {
               <Grid item xs={12} md={4}>
                 <Typography></Typography>
               </Grid>
-              <Grid item xs={12} md={8}>
-                <Typography></Typography>
-              </Grid>
+              <Grid item xs={12} md={8}></Grid>
             </Grid>
           </Paper>
         </main>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Typography,
@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import logo from "../images/new-logo2.png";
+import { useDispatch } from "react-redux";
+import { signOut } from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -56,9 +58,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavBar = () => {
+const NavBarP = () => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const dispatch = useDispatch();
+
+  const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -95,35 +99,49 @@ const NavBar = () => {
                 Find Donor
               </Link>
               <Link
-                to="/registration"
+                to="/profile"
                 onClick={handleClose}
                 className={classes.link}
               >
-                Become A Donor
+                Profile
               </Link>
-              <Link to="/signin" onClick={handleClose} className={classes.link}>
-                Login
+
+              <Link
+                to="#"
+                className={classes.link}
+                onClick={() => {
+                  dispatch(signOut());
+                }}
+              >
+                Logout
               </Link>
             </Hidden>
           </nav>
+
           <Hidden mdUp smUp>
             <IconButton
               edge="start"
+              onClick={handleClick}
               className={classes.menuIcon}
               color="inherit"
               aria-label="menu"
-              onClick={handleClick}
             >
               <MenuIcon />
             </IconButton>
           </Hidden>
           <Menu
+            id="simple-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link to="/" onClick={handleClose} className={classes.link1}>
+                Home
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
               <Link
                 to="/find-donor"
                 onClick={handleClose}
@@ -132,24 +150,23 @@ const NavBar = () => {
                 Find Donor
               </Link>
             </MenuItem>
-
-            <MenuItem>
+            <MenuItem onClick={handleClose}>
               <Link
-                to="/registration"
+                to="/profile"
                 onClick={handleClose}
                 className={classes.link1}
               >
-                Become A Donor
+                Profile
               </Link>
             </MenuItem>
-
-            <MenuItem>
+            <MenuItem onClick={handleClose}>
               <Link
-                to="/signin"
-                onClick={handleClose}
-                className={classes.link1}
+                to="#"
+                onClick={() => {
+                  dispatch(signOut());
+                }}
               >
-                Login
+                Logout
               </Link>
             </MenuItem>
           </Menu>
@@ -158,4 +175,4 @@ const NavBar = () => {
     </React.Fragment>
   );
 };
-export default NavBar;
+export default NavBarP;
