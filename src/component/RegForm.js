@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import {
   Grid,
   Typography,
   MenuItem,
-  Select,
   makeStyles,
   TextField,
-  FormControl,
   Paper,
   Button,
 } from "@material-ui/core";
-import { Formik } from "formik";
-import { Form } from "formik";
+import { Select } from "formik-material-ui";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import csc from "country-state-city";
 import { signUp } from "../actions";
 
 const PersonalDetailsSchema = Yup.object().shape({
@@ -30,6 +27,7 @@ const PersonalDetailsSchema = Yup.object().shape({
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
+  dob: Yup.date().required("Required"),
   age: Yup.number()
     .min(17, "You are not eligible")
     .max(65, "You are not eligible!")
@@ -38,26 +36,21 @@ const PersonalDetailsSchema = Yup.object().shape({
     .min(45, "You are not eligible")
     .max(110, "You are not eligible!")
     .required("Required"),
-  dob: Yup.date().required("Required"),
   gender: Yup.string().required("Required"),
   occupation: Yup.string().required("Required"),
   bgroup: Yup.string().required("Required"),
-  address: Yup.string()
-    .required("Required")
-    .max(100, "Too Long")
-    .min(5, "Too short"),
-  state: Yup.string().required("Required"),
-  city: Yup.string().required("Required"),
   phone: Yup.number().min(10).required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .min(6, "Password too short")
     .max(20, "Password too long")
     .required("Required"),
-  pincode: Yup.number()
-    .min(6, "Too Short!")
-    .max(7, "Too Long!")
-    .required("Required"),
+  address: Yup.string()
+    .required("Required")
+    .max(100, "Too Long")
+    .min(5, "Too short"),
+  states: Yup.string().required("Required"),
+  city: Yup.string().required("Required"),
 });
 const useStyles = makeStyles((theme) => ({
   Reglayout: {
@@ -92,10 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RegForm = (props) => {
   const classes = useStyles();
-
   const dispatch = useDispatch();
-
-  const gender = ["Male", "Female", "Other"];
   const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
   const occupation = [
     "Student",
@@ -107,21 +97,44 @@ const RegForm = (props) => {
     "Retired",
     "Other",
   ];
-  const stateList = csc.getStatesOfCountry("101");
-
-  const [states, setState] = useState("");
-  const [city, setCity] = useState("");
-
-  const cityList = csc.getCitiesOfState(states);
-
-  const handleChaangeState = (event) => {
-    setState(event.target.value);
-  };
-
-  const handleChaangeCity = (event) => {
-    setCity(event.target.value);
-  };
-
+  const states = [
+    "Andaman and Nicobar Islands",
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chandigarh",
+    "Chhattisgarh",
+    "Dadra and Nagar Haveli",
+    "Daman and Diu",
+    "Delhi",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu and Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Lakshadweep",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Orissa",
+    "Pondicherry",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttaranchal",
+    "Uttar Pradesh",
+    "West Bengal",
+  ];
   return (
     <React.Fragment>
       {" "}
@@ -143,25 +156,23 @@ const RegForm = (props) => {
                 ftrname: "",
                 dob: "",
                 age: "",
-                phone: "",
-                email: "",
-                address: "",
-                pincode: "",
+                weight: "",
                 gender: "",
                 occupation: "",
-                state: "",
-                city: "",
                 bgroup: "",
-                weight: "",
+                phone: "",
+                email: "",
                 password: "",
+                address: "",
+                states: "",
+                city: "",
               }}
               validationSchema={PersonalDetailsSchema}
               onSubmit={(values) => {
                 dispatch(signUp(values));
-                console.log(values);
               }}
             >
-              {({ errors, handleChange, touched }) => (
+              {({ values, errors, handleChange, touched }) => (
                 <Form>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -277,63 +288,64 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <FormControl>
-                        <Select
-                          id="gender"
-                          error={errors.gender && touched.gender}
-                          onChange={handleChange}
-                          name="gender"
-                          fullWidth
-                          displayEmpty
-                          variant="outlined"
-                        >
-                          <MenuItem disabled>Gender</MenuItem>
-                          {gender.map((val) => (
-                            <MenuItem key={val} value={val}>
-                              {val}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
+                      <Field
+                        component={Select}
+                        onChange={handleChange}
+                        name="gender"
+                        variant="outlined"
+                        value={values.gender}
+                        fullWidth
+                        displayEmpty
+                      >
+                        <MenuItem value="" disabled>
+                          Gender
+                        </MenuItem>
+                        <MenuItem value="Male">Male</MenuItem>
+                        <MenuItem value="Female">Female</MenuItem>
+                        <MenuItem value="Other">Other</MenuItem>
+                      </Field>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Select
+                      <Field
                         component={Select}
                         id="occupation"
                         error={errors.occupation && touched.occupation}
                         onChange={handleChange}
                         name="occupation"
-                        fullWidth
-                        displayEmpty
                         variant="outlined"
+                        displayEmpty
+                        fullWidth
                       >
-                        <MenuItem disabled>Occupation</MenuItem>
+                        <MenuItem value="" disabled>
+                          Occupation
+                        </MenuItem>
                         {occupation.map((val) => (
                           <MenuItem key={val} value={val}>
                             {val}
                           </MenuItem>
                         ))}
-                      </Select>
+                      </Field>
                     </Grid>{" "}
                     <Grid item xs={12} sm={6}>
-                      <Select
+                      <Field
                         component={Select}
-                        id="bgroup"
                         error={errors.bgroup && touched.bgroup}
                         onChange={handleChange}
-                        name="bgroup"
-                        fullWidth
                         displayEmpty
+                        fullWidth
+                        name="bgroup"
                         variant="outlined"
                         labelId="bloodgroup"
                       >
-                        <MenuItem disabled>Blood Group</MenuItem>
+                        <MenuItem value="" disabled>
+                          Blood Group
+                        </MenuItem>
                         {BloodGroup.map((val) => (
                           <MenuItem key={val} value={val}>
                             {val}
                           </MenuItem>
                         ))}
-                      </Select>
+                      </Field>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
@@ -413,48 +425,44 @@ const RegForm = (props) => {
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Select
-                        id="state"
-                        error={errors.state && touched.state}
-                        name="state"
+                      <Field
+                        component={Select}
+                        id="states"
+                        error={errors.states && touched.states}
+                        name="states"
                         fullWidth
                         displayEmpty
-                        value={states}
-                        onChange={handleChaangeState}
+                        onChange={handleChange}
                         variant="outlined"
                       >
                         <MenuItem value="" disabled>
                           State
                         </MenuItem>
-                        {stateList.map((val) => (
-                          <MenuItem key={val.id} value={val.id}>
-                            {val.name}
+                        {states.map((val) => (
+                          <MenuItem key={val} value={val}>
+                            {val}
                           </MenuItem>
                         ))}
-                      </Select>
+                      </Field>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <Select
-                        id="city"
+                      <TextField
                         error={errors.city && touched.city}
+                        onChange={handleChange}
+                        helperText={
+                          errors.city && touched.city ? errors.city : null
+                        }
                         name="city"
+                        label="City"
                         fullWidth
-                        value={city}
-                        onChange={handleChaangeCity}
-                        displayEmpty
                         variant="outlined"
-                      >
-                        <MenuItem value="" disabled>
-                          City
-                        </MenuItem>
-                        {cityList.map((val) => (
-                          <MenuItem key={val.id} value={val.id}>
-                            {val.name}
-                          </MenuItem>
-                        ))}
-                      </Select>
+                        autoComplete="off"
+                        InputLabelProps={{
+                          style: { color: "black" },
+                        }}
+                      />
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={12} style={{ textAlign: "right" }}>
                       <Button
                         className={classes.SubmitButton}
                         size="large"
