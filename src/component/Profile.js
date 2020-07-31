@@ -42,7 +42,6 @@ const Profile = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.auth.user);
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
-
   useEffect(() => {
     if (!isSignedIn) {
       history.push("/");
@@ -71,7 +70,24 @@ const Profile = () => {
               <Grid item xs={12} md={4}>
                 <Typography></Typography>
               </Grid>
-              <Grid item xs={12} md={8}></Grid>
+              <Grid item xs={12} md={8}>
+                <Typography>
+                  Name: {data.fname} {data.lname}
+                </Typography>
+                <Typography>Father's Name: {data.ftrname}</Typography>
+                <Typography>Date of Birth: {data.dob}</Typography>
+
+                <Typography>Age: {data.age}</Typography>
+                <Typography>Weight: {data.weight}</Typography>
+                <Typography>Gender: {data.gender}</Typography>
+                <Typography>Occupation: {data.occupation}</Typography>
+                <Typography>Blood Group: {data.bgroup}</Typography>
+                <Typography>Phone: {data.phone}</Typography>
+                <Typography>Email: {data.email}</Typography>
+                <Typography>Address: {data.address}</Typography>
+                <Typography>City: {data.city}</Typography>
+                <Typography>State: {data.states}</Typography>
+              </Grid>
             </Grid>
           </Paper>
         </main>
