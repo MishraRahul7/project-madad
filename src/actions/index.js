@@ -1,17 +1,36 @@
 import {
+<<<<<<< HEAD
+=======
+  // IMAGE_DATA,
+>>>>>>> updateCode
   SIGN_IN,
   SIGN_UP,
   SIGN_OUT,
   DELETE_DONOR,
   UPDATE_DONOR,
 } from "./types";
+<<<<<<< HEAD
 import history from "../history";
 import apis from "../apis/apis";
 
+=======
+// import Axios from "axios";
+import history from "../history";
+import apis from "../apis/apis";
+
+// export const imageDataApi = () => async (dispatch) => {
+//   const response = await Axios.get("https://source.unsplash.com/");
+//   dispatch({
+//     type: IMAGE_DATA,
+//     payload: response.data,
+//   });
+// };
+
+>>>>>>> updateCode
 export const signUp = (values) => async (dispatch) => {
   let response;
   try {
-    response = await apis.post("/users", values);
+    response = await apis.post("/users/add", values);
     if (response.status === 201) {
       localStorage.setItem("jwt", response.data.token);
     }
@@ -19,7 +38,8 @@ export const signUp = (values) => async (dispatch) => {
       type: SIGN_UP,
       payload: response.data,
     });
-    history.push("/");
+    history.push("/signin");
+    console.log(history);
   } catch (e) {}
 };
 

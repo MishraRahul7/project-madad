@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Home from "./Home";
 import FindDonor from "./FindDonor";
@@ -13,14 +13,14 @@ import "../Style.css";
 const App = () => {
   return (
     <>
-      <Router>
-        <NavBar />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/registration" component={Registration} />
-        <Route exact path="/find-donor" component={FindDonor} />
-        <Route exact path="/profile" component={Profile} />
-      </Router>
+      <NavBar />
+      <Switch>
+        <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/signin" render={() => <SignIn />} />
+        <Route exact path="/registration" render={() => <Registration />} />
+        <Route exact path="/find-donor" render={() => <FindDonor />} />
+        <Route exact path="/profile" render={() => <Profile />} />
+      </Switch>
     </>
   );
 };

@@ -9,9 +9,13 @@ import {
   Paper,
   Link,
 } from "@material-ui/core";
+<<<<<<< HEAD
 import { Icon } from "@iconify/react";
 import googleIcon from "@iconify/icons-mdi/google";
 import facebookIcon from "@iconify/icons-mdi/facebook";
+=======
+import { Link } from "react-router-dom";
+>>>>>>> updateCode
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { signIn } from "../actions";
@@ -83,7 +87,7 @@ const SignIn = () => {
         <Grid item xs={12} md={4}>
           <Paper elevation={5} className={classes.paper}>
             <Typography component="h1" className={classes.signInHead}>
-              Sign In With
+              Sign In
             </Typography>
             <Formik
               initialValues={{
@@ -98,40 +102,6 @@ const SignIn = () => {
               {({ errors, handleChange, touched }) => (
                 <Form className={classes.form}>
                   <Grid container direction="row" spacing={2}>
-                    <Grid item xs={12} md={6} align="right">
-                      <Link href="/" className={classes.text} variant="body2">
-                        <Button
-                          variant="outlined"
-                          size="large"
-                          fullWidth
-                          className={classes.socialLoginButton}
-                        >
-                          <Icon
-                            height="2em"
-                            className={classes.icons}
-                            icon={facebookIcon}
-                          />
-                          Facebook
-                        </Button>
-                      </Link>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Link href="/" className={classes.text} variant="body2">
-                        <Button
-                          variant="outlined"
-                          size="large"
-                          fullWidth
-                          className={classes.socialLoginButton}
-                        >
-                          <Icon
-                            height="2em"
-                            className={classes.icons}
-                            icon={googleIcon}
-                          />
-                          Google
-                        </Button>
-                      </Link>
-                    </Grid>
                     <Grid item xs={12} md={12}>
                       <TextField
                         name="email"

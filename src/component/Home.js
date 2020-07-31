@@ -1,9 +1,8 @@
 import React from "react";
-import { makeStyles, Grid, Typography, Card, Link } from "@material-ui/core";
+import { makeStyles, Grid, Typography, Link, Hidden } from "@material-ui/core";
 import NewsCard from "../container/NewsCard";
 import ProcessCard from "../container/ProcessCard";
-
-import HeaderImage from "../images/headerImage1.png";
+import HeaderImage from "../images/headerImage3.png";
 import midImage from "../images/mid.png";
 
 function Copyright() {
@@ -36,27 +35,6 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(3),
   },
-
-  headerTextDiv: {
-    color: "#ef101a",
-    width: "50vw",
-    backgroundColor: "transparent",
-    maxHeight: "50vh",
-    textAlign: "center",
-    margin: theme.spacing(20, 0, 0, 10),
-    padding: "20px",
-  },
-  Text1: {
-    fontSize: "2.5em",
-    marginBottom: theme.spacing(4),
-  },
-  Text2: {
-    fontSize: "4em",
-    textTransform: "uppercase",
-    marginBottom: theme.spacing(-5),
-  },
-  Text3: { fontSize: "6em", fontWeight: "bold", textTransform: "uppercase" },
-
   middleHeading: {
     color: "black",
     marginBottom: "15px",
@@ -88,17 +66,9 @@ const Home = () => {
         className={classes.root}
       >
         {/*Middle*/}
-        <Grid item xs={12} className={classes.headerImage}>
-          <Card elevation={0} className={classes.headerTextDiv}>
-            <Typography className={classes.Text1}>
-              The blood you donate gives someone another chance at life.
-            </Typography>
-            <Typography className={classes.Text2}>
-              Give the gift of life
-            </Typography>
-            <Typography className={classes.Text3}>Donate Blood</Typography>
-          </Card>
-        </Grid>
+        <Hidden smDown>
+          <Grid item xs={12} className={classes.headerImage}></Grid>
+        </Hidden>
         <Grid item xs={12} md={10} className={classes.secondMiddle}>
           <Typography
             variant="h4"
@@ -111,7 +81,7 @@ const Home = () => {
             <img src={midImage} alt="middleInage" style={{ height: "4vh" }} />
           </Typography>
           <Grid container>
-            <Grid item xs={12} sm={3} md={3}>
+            <Grid item xs={12} sm={3} md={3} className={classes.processCard}>
               <ProcessCard
                 heading="REGISTRATION"
                 body="You need to complete a very simple registration form. Which contains all required contact information to enter in the donation process."
