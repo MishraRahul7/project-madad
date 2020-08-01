@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Grid, Typography, makeStyles, Paper } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Grid, Typography, makeStyles, Paper, Button } from "@material-ui/core";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUser, deleteUser } from "../actions";
+import { getUser, deleteUser, updateUser } from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   Reglayout: {
@@ -27,9 +27,16 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(3),
     },
   },
-  SubmitButton: {
+  saveButton: {
     color: "white",
-    backgroundColor: "#811C14",
+    backgroundColor: "lightgreen",
+    "&:hover": {
+      backgroundColor: "green",
+    },
+  },
+  deleteButton: {
+    color: "white",
+    backgroundColor: "red",
     "&:hover": {
       backgroundColor: "#ac1c14",
     },
@@ -72,21 +79,69 @@ const Profile = () => {
               </Grid>
               <Grid item xs={12} md={8}>
                 <Typography>
-                  Name: {data.fname} {data.lname}
+                  <b>Name:</b> {data.fname} {data.lname}
                 </Typography>
-                <Typography>Father's Name: {data.ftrname}</Typography>
-                <Typography>Date of Birth: {data.dob}</Typography>
+                <Typography>
+                  <b>Father's Name:</b> {data.ftrname}
+                </Typography>
+                <Typography>
+                  <b>Date of Birth:</b> {data.dob}
+                </Typography>
 
-                <Typography>Age: {data.age}</Typography>
-                <Typography>Weight: {data.weight}</Typography>
-                <Typography>Gender: {data.gender}</Typography>
-                <Typography>Occupation: {data.occupation}</Typography>
-                <Typography>Blood Group: {data.bgroup}</Typography>
-                <Typography>Phone: {data.phone}</Typography>
-                <Typography>Email: {data.email}</Typography>
-                <Typography>Address: {data.address}</Typography>
-                <Typography>City: {data.city}</Typography>
-                <Typography>State: {data.states}</Typography>
+                <Typography>
+                  <b>Age:</b> {data.age}
+                </Typography>
+                <Typography>
+                  <b>Weight:</b> {data.weight}
+                </Typography>
+                <Typography>
+                  <b>Gender:</b> {data.gender}
+                </Typography>
+                <Typography>
+                  <b>Occupation:</b> {data.occupation}
+                </Typography>
+                <Typography>
+                  <b>Blood Group:</b>
+                  {data.bgroup}
+                </Typography>
+                <Typography>
+                  <b>Phone:</b> {data.phone}
+                </Typography>
+                <Typography>
+                  <b>Email:</b> {data.email}
+                </Typography>
+                <Typography>
+                  <b>Address: </b>
+                  {data.address}
+                </Typography>
+                <Typography>
+                  <b>City:</b> {data.city}
+                </Typography>
+                <Typography>
+                  <b>State: </b>
+                  {data.states}
+                </Typography>
+                <Typography>
+                  <Button
+                    className={classes.saveButton}
+                    type="submit"
+                    onClick={() => {
+                      dispatch(updateUser());
+                    }}
+                  >
+                    Save
+                  </Button>
+                  {"   "}
+                  <Button
+                    className={classes.deleteButton}
+                    type="submit"
+                    onClick={() => {
+                      dispatch(deleteUser());
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </Typography>
               </Grid>
             </Grid>
           </Paper>
