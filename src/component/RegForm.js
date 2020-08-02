@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   Grid,
@@ -13,6 +13,8 @@ import { Select } from "formik-material-ui";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { signUp } from "../actions";
+
+import { SyncLoader } from "react-spinners";
 
 const PersonalDetailsSchema = Yup.object().shape({
   fname: Yup.string()
@@ -86,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
 const RegForm = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
+  const bgroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
   const occupation = [
     "Student",
     "Business",
@@ -135,6 +137,9 @@ const RegForm = (props) => {
     "Uttar Pradesh",
     "West Bengal",
   ];
+
+  const [loading, setLoading] = useState(false);
+
   return (
     <React.Fragment>
       {" "}
@@ -164,12 +169,14 @@ const RegForm = (props) => {
                 email: "",
                 password: "",
                 address: "",
-                states: "",
                 city: "",
+                states: "",
               }}
               validationSchema={PersonalDetailsSchema}
-              onSubmit={(values) => {
-                dispatch(signUp(values));
+              onSubmit={async (values) => {
+                setLoading(true);
+                await dispatch(signUp(values));
+                setLoading(false);
               }}
             >
               {({ values, errors, handleChange, touched }) => (
@@ -328,6 +335,7 @@ const RegForm = (props) => {
                     </Grid>{" "}
                     <Grid item xs={12} sm={6}>
                       <Field
+                        id="bgroup"
                         component={Select}
                         error={errors.bgroup && touched.bgroup}
                         onChange={handleChange}
@@ -335,12 +343,11 @@ const RegForm = (props) => {
                         fullWidth
                         name="bgroup"
                         variant="outlined"
-                        labelId="bloodgroup"
                       >
                         <MenuItem value="" disabled>
                           Blood Group
                         </MenuItem>
-                        {BloodGroup.map((val) => (
+                        {bgroup.map((val) => (
                           <MenuItem key={val} value={val}>
                             {val}
                           </MenuItem>
@@ -468,8 +475,13 @@ const RegForm = (props) => {
                         size="large"
                         type="submit"
                         variant="outlined"
+                        disabled={loading}
                       >
-                        Submit
+                        {loading ? (
+                          <SyncLoader size={10} color={"#fff"} />
+                        ) : (
+                          <span>Submit</span>
+                        )}
                       </Button>
                     </Grid>
                   </Grid>

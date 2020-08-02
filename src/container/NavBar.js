@@ -116,43 +116,44 @@ const NavBar = () => {
             >
               <MenuIcon />
             </IconButton>
+
+            <Menu
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem>
+                <Link
+                  to="/find-donor"
+                  onClick={handleClose}
+                  className={classes.link1}
+                >
+                  Find Donor
+                </Link>
+              </MenuItem>
+
+              <MenuItem>
+                <Link
+                  to="/registration"
+                  onClick={handleClose}
+                  className={classes.link1}
+                >
+                  Become A Donor
+                </Link>
+              </MenuItem>
+
+              <MenuItem>
+                <Link
+                  to="/signin"
+                  onClick={handleClose}
+                  className={classes.link1}
+                >
+                  Login
+                </Link>
+              </MenuItem>
+            </Menu>
           </Hidden>
-          <Menu
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <MenuItem>
-              <Link
-                to="/find-donor"
-                onClick={handleClose}
-                className={classes.link1}
-              >
-                Find Donor
-              </Link>
-            </MenuItem>
-
-            <MenuItem>
-              <Link
-                to="/registration"
-                onClick={handleClose}
-                className={classes.link1}
-              >
-                Become A Donor
-              </Link>
-            </MenuItem>
-
-            <MenuItem>
-              <Link
-                to="/signin"
-                onClick={handleClose}
-                className={classes.link1}
-              >
-                Login
-              </Link>
-            </MenuItem>
-          </Menu>
         </Toolbar>
       </AppBar>
     </React.Fragment>

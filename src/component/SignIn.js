@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   makeStyles,
@@ -7,9 +7,13 @@ import {
   Button,
   TextField,
   Paper,
+  // Snackbar,
 } from "@material-ui/core";
+
+// import MuiAlert from "@material-ui/lab/Alert";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
+import { SyncLoader } from "react-spinners";
 import * as Yup from "yup";
 import { signIn } from "../actions";
 
@@ -55,6 +59,21 @@ const SignIn = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  // const [open, setOpen] = useState(false);
+  // const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+
+  //   setOpen(false);
+  // };
+
+  // const Alert = (props) => {
+  //   return <MuiAlert elevation={6} variant="filled" {...props} />;
+  // };
   return (
     <div className={classes.mainContainer}>
       <Grid container direction="row" justify="center" alignItems="center">
@@ -69,8 +88,17 @@ const SignIn = () => {
                 password: "",
               }}
               validationSchema={SignInSchema}
-              onSubmit={(values) => {
-                dispatch(signIn(values));
+              onSubmit={async (values) => {
+                setLoading(true);
+                try {
+                  await dispatch(signIn(values));
+                  // setSuccess(true);
+                  // setOpen(true);
+                } catch (e) {
+                  // setSuccess(false);
+                  // setOpen(true);
+                }
+                setLoading(false);
               }}
             >
               {({ errors, handleChange, touched }) => (
@@ -122,9 +150,14 @@ const SignIn = () => {
                         size="large"
                         variant="contained"
                         color="default"
+                        disabled={loading}
                         className={classes.signInBtn}
                       >
-                        Sign In
+                        {loading ? (
+                          <SyncLoader size={10} color={"#fff"} />
+                        ) : (
+                          <span>Sign In</span>
+                        )}
                       </Button>
                     </Grid>
                     <Grid item xs={12} md={12}>
@@ -148,6 +181,17 @@ const SignIn = () => {
           </Paper>
         </Grid>
       </Grid>
+      {/* <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+        {success ? (
+          <Alert onClose={handleClose} severity="success">
+            You login successfully
+          </Alert>
+        ) : (
+          <Alert severity="error" onClose={handleClose}>
+            Some Error Occured!
+          </Alert>
+        )}
+      </Snackbar> */}
     </div>
   );
 };

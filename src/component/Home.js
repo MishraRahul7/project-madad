@@ -4,7 +4,6 @@ import NewsCard from "../container/NewsCard";
 import ProcessCard from "../container/ProcessCard";
 import HeaderImage from "../images/headerImage3.png";
 import midImage from "../images/mid.png";
-
 function Copyright() {
   return (
     <Typography variant="body2" align="center">

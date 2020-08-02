@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
-import { Grid, Typography, makeStyles, Paper, Button } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import {
+  Grid,
+  Typography,
+  TextField,
+  makeStyles,
+  Paper,
+  Button,
+} from "@material-ui/core";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUser, deleteUser, updateUser } from "../actions";
-
+import { getUser, deleteUser } from "../actions";
+import Spinner from "../container/Spinner";
+import { SyncLoader } from "react-spinners";
 const useStyles = makeStyles((theme) => ({
   Reglayout: {
     width: "auto",
@@ -47,7 +55,9 @@ const Profile = () => {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const data = useSelector((state) => state.auth.user);
+
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
   useEffect(() => {
     if (!isSignedIn) {
@@ -58,7 +68,7 @@ const Profile = () => {
     }
   }, [isSignedIn, history, dispatch]);
   if (!data) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   return (
     <React.Fragment>
@@ -73,73 +83,197 @@ const Profile = () => {
             >
               Your Profile
             </Typography>
-            <Grid container direction="row">
-              <Grid item xs={12} md={4}>
-                <Typography></Typography>
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              justify="center"
+            >
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Name"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "Black" },
+                  }}
+                  value={`${data.fname} ${data.lname}`}
+                />
               </Grid>
-              <Grid item xs={12} md={8}>
-                <Typography>
-                  <b>Name:</b> {data.fname} {data.lname}
-                </Typography>
-                <Typography>
-                  <b>Father's Name:</b> {data.ftrname}
-                </Typography>
-                <Typography>
-                  <b>Date of Birth:</b> {data.dob}
-                </Typography>
+              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
+                <TextField
+                  label="Father's Name"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.ftrname}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Date of Birth"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.dob}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
+                <TextField
+                  label="Age"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.age}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Weight"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.weight}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
+                <TextField
+                  label="Gender"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.gender}
+                />
+              </Grid>
 
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Occupation"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.occupation}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
+                <TextField
+                  label="Blood Group"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.bgroup}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="Phone"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.phone}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
+                <TextField
+                  label="Email"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.email}
+                />
+              </Grid>
+              <Grid item xs={12} md={12}>
+                <TextField
+                  label="Address"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.address}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <TextField
+                  label="City"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.city}
+                />
+              </Grid>
+              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
+                <TextField
+                  label="State"
+                  margin="normal"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  InputLabelProps={{
+                    style: { color: "black" },
+                  }}
+                  value={data.states}
+                />
+              </Grid>
+              <Grid item xs={12} md={12} style={{ textAlign: "right" }}>
                 <Typography>
-                  <b>Age:</b> {data.age}
-                </Typography>
-                <Typography>
-                  <b>Weight:</b> {data.weight}
-                </Typography>
-                <Typography>
-                  <b>Gender:</b> {data.gender}
-                </Typography>
-                <Typography>
-                  <b>Occupation:</b> {data.occupation}
-                </Typography>
-                <Typography>
-                  <b>Blood Group:</b>
-                  {data.bgroup}
-                </Typography>
-                <Typography>
-                  <b>Phone:</b> {data.phone}
-                </Typography>
-                <Typography>
-                  <b>Email:</b> {data.email}
-                </Typography>
-                <Typography>
-                  <b>Address: </b>
-                  {data.address}
-                </Typography>
-                <Typography>
-                  <b>City:</b> {data.city}
-                </Typography>
-                <Typography>
-                  <b>State: </b>
-                  {data.states}
-                </Typography>
-                <Typography>
-                  <Button
-                    className={classes.saveButton}
-                    type="submit"
-                    onClick={() => {
-                      dispatch(updateUser());
-                    }}
-                  >
-                    Save
-                  </Button>
-                  {"   "}
                   <Button
                     className={classes.deleteButton}
                     type="submit"
-                    onClick={() => {
-                      dispatch(deleteUser());
+                    disabled={loading}
+                    onClick={async () => {
+                      setLoading(true);
+                      await dispatch(deleteUser());
+                      setLoading(false);
                     }}
                   >
-                    Delete
+                    {loading ? (
+                      <SyncLoader size={10} color={"#fff"} />
+                    ) : (
+                      <span>Delete</span>
+                    )}
                   </Button>
                 </Typography>
               </Grid>
