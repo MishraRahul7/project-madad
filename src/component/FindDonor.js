@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import midImage from "../images/mid.png";
 import {
   makeStyles,
@@ -10,7 +10,13 @@ import {
   Container,
   Link,
 } from "@material-ui/core";
+
+import { useSelector, useDispatch } from "react-redux";
+
+import { getAllUser } from "../actions";
+
 import Cities from "../container/StatesAndCities";
+
 function Copyright() {
   return (
     <Typography variant="body2" align="center">
@@ -75,7 +81,12 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const FindDonor = () => {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.auth.user);
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, [dispatch]);
+  console.log(data);
   return (
     <React.Fragment>
       <Grid

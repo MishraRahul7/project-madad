@@ -5,6 +5,7 @@ import {
   DELETE_DONOR,
   UPDATE_DONOR,
   GET_USER,
+  GET_ALL_USER,
 } from "./types";
 import history from "../history";
 import apis from "../apis/apis";
@@ -52,6 +53,15 @@ export const getUser = () => async (dispatch) => {
     payload: response.data,
   });
   history.push("/profile");
+};
+
+export const getAllUser = () => async (dispatch) => {
+  const response = await apis.get("/users/list");
+  dispatch({
+    type: GET_ALL_USER,
+    payload: response.data,
+  });
+  history.push("/find-donor");
 };
 
 export const signOut = () => async (dispatch) => {

@@ -4,6 +4,7 @@ import {
   UPDATE_DONOR,
   SIGN_UP,
   GET_USER,
+  GET_ALL_USER,
 } from "../actions/types";
 const INITIAL_STATE = {
   isSignedIn: null,
@@ -22,6 +23,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, isSignedIn: true, user: action.payload };
     case GET_USER:
       return { ...state, isSignedIn: true, user: action.payload };
+    case GET_ALL_USER:
+      return { ...state, user: action.payload };
     default:
       return state;
   }

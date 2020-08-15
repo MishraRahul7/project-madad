@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  Typography,
-  TextField,
-  makeStyles,
-  Paper,
-  Button,
-} from "@material-ui/core";
+import { Grid, Typography, makeStyles, Paper, Button } from "@material-ui/core";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -49,6 +42,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#ac1c14",
     },
   },
+  paddingGrid: { padding: "10px 0px 10px 0px" },
+  Text: { fontSize: "1.1em", fontWeight: "bold" },
 }));
 
 const Profile = () => {
@@ -57,7 +52,6 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const data = useSelector((state) => state.auth.user);
-
   const isSignedIn = useSelector((state) => state.auth.isSignedIn);
   useEffect(() => {
     if (!isSignedIn) {
@@ -90,172 +84,83 @@ const Profile = () => {
               justify="center"
             >
               <Grid item xs={12} md={6}>
-                <TextField
-                  label="Name"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "Black" },
-                  }}
-                  value={`${data.fname} ${data.lname}`}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
-                <TextField
-                  label="Father's Name"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.ftrname}
-                />
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Name:&nbsp;</span>{" "}
+                  {`${data.fname} ${data.lname}`}
+                </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
-                <TextField
-                  label="Date of Birth"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.dob}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
-                <TextField
-                  label="Age"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.age}
-                />
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Father's Name:&nbsp;</span>
+                  {data.ftrname}
+                </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
-                <TextField
-                  label="Weight"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.weight}
-                />
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Date of Birth:&nbsp;</span>
+                  {data.dob}
+                </Typography>
               </Grid>
-              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
-                <TextField
-                  label="Gender"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.gender}
-                />
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Age:&nbsp;</span>
+                  {data.age}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Weight:&nbsp;</span>
+                  {data.weight}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Gender:&nbsp;</span>
+                  {data.gender}
+                </Typography>
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <TextField
-                  label="Occupation"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.occupation}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
-                <TextField
-                  label="Blood Group"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.bgroup}
-                />
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Occupation:&nbsp;</span>
+                  {data.occupation}
+                </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
-                <TextField
-                  label="Phone"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.phone}
-                />
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Blood Group:&nbsp;</span>
+                  {data.bgroup}
+                </Typography>
               </Grid>
-              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
-                <TextField
-                  label="Email"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.email}
-                />
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Phone:&nbsp;</span>
+                  {data.phone}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Email:&nbsp;</span>
+                  {data.email}
+                </Typography>
               </Grid>
               <Grid item xs={12} md={12}>
-                <TextField
-                  label="Address"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.address}
-                />
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>Address:&nbsp;</span>
+                  {data.address}
+                </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
-                <TextField
-                  label="City"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.city}
-                />
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>City:&nbsp;</span>
+                  {data.city}
+                </Typography>
               </Grid>
-              <Grid item xs={12} md={6} style={{ paddingLeft: "10px" }}>
-                <TextField
-                  label="State"
-                  margin="normal"
-                  size="small"
-                  variant="outlined"
-                  fullWidth
-                  InputLabelProps={{
-                    style: { color: "black" },
-                  }}
-                  value={data.states}
-                />
+              <Grid item xs={12} md={6}>
+                <Typography className={classes.paddingGrid}>
+                  <span className={classes.Text}>State:&nbsp;</span>
+                  {data.states}
+                </Typography>
               </Grid>
               <Grid item xs={12} md={12} style={{ textAlign: "right" }}>
                 <Typography>

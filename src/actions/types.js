@@ -3,6 +3,7 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
 export const SIGN_OUT = "SIGN_OUT";
 export const GET_USER = "GET_USER";
+export const GET_ALL_USER = "GET_ALL_USER";
 export const DELETE_DONOR = "DELETE_DONOR";
 export const UPDATE_DONOR = "UPDATE_DONOR";
 export const NOTIFICATION_SUCCESS = "NOTIFICATION_SUCCESS";
