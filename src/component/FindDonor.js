@@ -12,11 +12,9 @@ import {
 } from "@material-ui/core";
 
 import { useSelector, useDispatch } from "react-redux";
-
 import { getAllUser } from "../actions";
-
 import Cities from "../container/StatesAndCities";
-
+import userImage from "../images/users.png";
 function Copyright() {
   return (
     <Typography variant="body2" align="center">
@@ -41,15 +39,8 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
   cardGrid: {
-    paddingTop: theme.spacing(8),
+    paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(8),
   },
   card: {
@@ -62,8 +53,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
   },
   profilePhoto: {
-    height: "20vh",
-    width: "100vw",
+    height: "25vh",
+    width: "60%",
+    alignSelf: "center",
   },
   footer: {
     color: "white",
@@ -114,30 +106,31 @@ const FindDonor = () => {
                 <Grid item key={key} xs={12} sm={6} md={3}>
                   <Card className={classes.card}>
                     <CardMedia
+                      image={`${userImage}`}
                       className={classes.profilePhoto}
-                      image="https://source.unsplash.com/random"
                     ></CardMedia>
                     <CardContent className={classes.CardContent}>
                       <Typography className={classes.cardValues}>
-                        <span className={classes.cardHeadings}>Name:</span>
-                        &nbsp;{value.fname}&nbsp;{value.lname}
+                        <Grid item>
+                          <span className={classes.cardHeadings}>Name:</span>
+                        </Grid>
+                        <Grid item>
+                          {value.fname}&nbsp;{value.lname}
+                        </Grid>
                       </Typography>
                       <Typography>
-                        <span className={classes.cardHeadings}>Phone:</span>
-                        &nbsp;
-                        {value.phone}
+                        <Grid item>
+                          <span className={classes.cardHeadings}>Phone:</span>
+                        </Grid>
+                        <Grid item>{value.phone}</Grid>
                       </Typography>
                       <Typography>
-                        <span className={classes.cardHeadings}>Address:</span>{" "}
-                        &nbsp;
-                        {value.address}
-                      </Typography>
-                      <Typography>
-                        <span className={classes.cardHeadings}>
-                          Blood Group:
-                        </span>
-                        &nbsp;
-                        {value.bgroup}
+                        <Grid item>
+                          <span className={classes.cardHeadings}>
+                            Blood Group:
+                          </span>
+                        </Grid>
+                        <Grid item>{value.bgroup}</Grid>
                       </Typography>
                     </CardContent>
                   </Card>
