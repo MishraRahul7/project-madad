@@ -21,8 +21,8 @@ export const signUp = (values) => async (dispatch) => {
       type: SIGN_UP,
       payload: response.data,
     });
+    alert("Thank You!");
     history.push("/");
-    console.log("Signed up done!");
   } catch (e) {}
 };
 

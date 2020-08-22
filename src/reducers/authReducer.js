@@ -9,6 +9,7 @@ import {
 const INITIAL_STATE = {
   isSignedIn: null,
   user: null,
+  users: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -24,7 +25,7 @@ export default (state = INITIAL_STATE, action) => {
     case GET_USER:
       return { ...state, isSignedIn: true, user: action.payload };
     case GET_ALL_USER:
-      return { ...state, user: action.payload };
+      return { ...state, users: action.payload };
     default:
       return state;
   }

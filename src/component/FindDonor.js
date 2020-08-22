@@ -75,18 +75,19 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 300,
     color: "white",
   },
+  cardHeadings: { color: "yellow", textAlign: "left", fontSize: "0.8em" },
+  cardValues: { fontSize: "1.2em" },
 }));
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 const FindDonor = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.auth.user);
+  const data = useSelector((state) => state.auth.users);
   useEffect(() => {
     dispatch(getAllUser());
   }, [dispatch]);
-  console.log(data);
+  console.log(data.length);
+
   return (
     <React.Fragment>
       <Grid
@@ -109,25 +110,34 @@ const FindDonor = () => {
             </Typography>
             <Cities />
             <Grid container spacing={4}>
-              {cards.map((card) => (
-                <Grid item key={card} xs={12} sm={6} md={3}>
+              {data.map((value, key) => (
+                <Grid item key={key} xs={12} sm={6} md={3}>
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.profilePhoto}
                       image="https://source.unsplash.com/random"
                     ></CardMedia>
                     <CardContent className={classes.CardContent}>
-                      <Typography className={classes.hideDetailUser}>
-                        Name:
+                      <Typography className={classes.cardValues}>
+                        <span className={classes.cardHeadings}>Name:</span>
+                        &nbsp;{value.fname}&nbsp;{value.lname}
                       </Typography>
-                      <Typography className={classes.hideDetailUser}>
-                        Phone:
+                      <Typography>
+                        <span className={classes.cardHeadings}>Phone:</span>
+                        &nbsp;
+                        {value.phone}
                       </Typography>
-                      <Typography className={classes.hideDetailUser}>
-                        Address:
+                      <Typography>
+                        <span className={classes.cardHeadings}>Address:</span>{" "}
+                        &nbsp;
+                        {value.address}
                       </Typography>
-                      <Typography className={classes.hideDetailUser}>
-                        Blood Group:
+                      <Typography>
+                        <span className={classes.cardHeadings}>
+                          Blood Group:
+                        </span>
+                        &nbsp;
+                        {value.bgroup}
                       </Typography>
                     </CardContent>
                   </Card>

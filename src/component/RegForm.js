@@ -13,7 +13,7 @@ import { Select } from "formik-material-ui";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { signUp } from "../actions";
-
+import moment from "moment";
 import { SyncLoader } from "react-spinners";
 
 const PersonalDetailsSchema = Yup.object().shape({
@@ -175,7 +175,11 @@ const RegForm = (props) => {
               validationSchema={PersonalDetailsSchema}
               onSubmit={async (values) => {
                 setLoading(true);
-                await dispatch(signUp(values));
+
+                let newDate = moment(values.dob).format("YYYY-MM-DD ");
+                console.log(newDate);
+                await dispatch(signUp({ ...values, newDate }));
+                console.log(values);
                 setLoading(false);
               }}
             >
