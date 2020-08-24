@@ -1,48 +1,20 @@
 import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
-import { useDispatch, useSelector } from "react-redux";
-import IconButton from "@material-ui/core/IconButton";
-import { Icon } from "@material-ui/core";
-import { clearSnackbar } from "../actions/index";
 
-const Notification = () => {
-  const dispatch = useDispatch();
+const Notification = (props) => {
+  const [snackbarOpen, setSnakbarOpen] = React.useState(false);
 
-  const { successSnackbarOpen, successSnackbarMessage } = useSelector(
-    (state) => state.ui
-  );
-
-  function handleClose() {
-    dispatch(clearSnackbar());
-  }
-
+  const handleClose = (e) => {
+    setSnakbarOpen(false);
+  };
   return (
     <div>
       <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={successSnackbarOpen}
-        autoHideDuration={4000}
+        anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+        open={snackbarOpen}
         onClose={handleClose}
-        aria-describedby="client-snackbar"
-        message={
-          <span id="client-snackbar">
-            <Icon>check_circle</Icon>
-            {successSnackbarMessage}
-          </span>
-        }
-        action={[
-          <IconButton
-            key="close"
-            aria-label="close"
-            color="inherit"
-            onClick={handleClose}
-          >
-            <Icon>close</Icon>
-          </IconButton>,
-        ]}
+        message={props.mess}
+        autoHideDuration={3000}
       />
     </div>
   );

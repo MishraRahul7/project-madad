@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { getUser, deleteUser } from "../actions";
 import Spinner from "../container/Spinner";
 import { SyncLoader } from "react-spinners";
+
 const useStyles = makeStyles((theme) => ({
   Reglayout: {
     width: "auto",

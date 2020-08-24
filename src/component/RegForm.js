@@ -9,13 +9,14 @@ import {
   Paper,
   Button,
 } from "@material-ui/core";
+
 import { Select } from "formik-material-ui";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { signUp } from "../actions";
 import moment from "moment";
 import { SyncLoader } from "react-spinners";
-
+import Notification from "../container/Notification";
 const PersonalDetailsSchema = Yup.object().shape({
   fname: Yup.string()
     .min(2, "Too Short!")
@@ -142,7 +143,6 @@ const RegForm = (props) => {
 
   return (
     <React.Fragment>
-      {" "}
       <Grid container justify="center" alignItems="center">
         <main className={classes.Reglayout}>
           <Paper elevation={5} className={classes.Regpaper}>
@@ -494,6 +494,7 @@ const RegForm = (props) => {
             </Formik>
           </Paper>
         </main>
+        <Notification message="Thank You" />;
       </Grid>
     </React.Fragment>
   );

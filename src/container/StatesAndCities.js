@@ -11,8 +11,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StatesAndCities = () => {
-  const BloodGroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
+const StatesAndCities = (props) => {
+  const BloodGroup = [
+    "A+",
+    "A-",
+    "AB+",
+    "AB-",
+    "B+",
+    "B-",
+    "O+",
+    "O-",
+    "All blood groups",
+  ];
   const classes = useStyles();
   const stateList = csc.getStatesOfCountry("101");
 

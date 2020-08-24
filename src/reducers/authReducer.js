@@ -5,6 +5,7 @@ import {
   SIGN_UP,
   GET_USER,
   GET_ALL_USER,
+  DELETE_DONOR,
 } from "../actions/types";
 const INITIAL_STATE = {
   isSignedIn: null,
@@ -17,8 +18,10 @@ export default (state = INITIAL_STATE, action) => {
     case SIGN_IN:
       return { ...state, isSignedIn: true, user: action.payload };
     case SIGN_UP:
-      return { ...state, isSignedIn: true, user: action.payload };
+      return { ...state, isSignedIn: false, user: action.payload };
     case SIGN_OUT:
+      return { ...state, isSignedIn: false, user: null };
+    case DELETE_DONOR:
       return { ...state, isSignedIn: false, user: null };
     case UPDATE_DONOR:
       return { ...state, isSignedIn: true, user: action.payload };

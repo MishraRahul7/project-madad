@@ -21,9 +21,10 @@ export const signUp = (values) => async (dispatch) => {
       type: SIGN_UP,
       payload: response.data,
     });
-    alert("Thank You!");
-    history.push("/");
-  } catch (e) {}
+    history.push("/signin");
+  } catch (e) {
+    alert("Something went wrong");
+  }
 };
 
 export const signIn = (values) => async (dispatch) => {
@@ -37,9 +38,11 @@ export const signIn = (values) => async (dispatch) => {
       type: SIGN_IN,
       payload: response.data,
     });
+    alert("Sign In Successful!");
     history.push("/");
-    console.log("Signed In");
-  } catch (e) {}
+  } catch (e) {
+    alert("please enter correct credentials");
+  }
 };
 
 export const getUser = () => async (dispatch) => {
@@ -88,7 +91,7 @@ export const deleteUser = () => async (dispatch) => {
   dispatch({
     type: DELETE_DONOR,
   });
-  console.log("user Deleted");
+  alert("user is Deleted");
   history.push("/");
 };
 

@@ -78,8 +78,6 @@ const FindDonor = () => {
   useEffect(() => {
     dispatch(getAllUser());
   }, [dispatch]);
-  console.log(data.length);
-
   return (
     <React.Fragment>
       <Grid
@@ -108,29 +106,24 @@ const FindDonor = () => {
                     <CardMedia
                       image={`${userImage}`}
                       className={classes.profilePhoto}
-                    ></CardMedia>
+                    />
                     <CardContent className={classes.CardContent}>
                       <Typography className={classes.cardValues}>
-                        <Grid item>
-                          <span className={classes.cardHeadings}>Name:</span>
-                        </Grid>
-                        <Grid item>
-                          {value.fname}&nbsp;{value.lname}
-                        </Grid>
+                        <span className={classes.cardHeadings}>Name:</span>
+                        <br />
+                        {value.fname}&nbsp;{value.lname}
                       </Typography>
                       <Typography>
-                        <Grid item>
-                          <span className={classes.cardHeadings}>Phone:</span>
-                        </Grid>
-                        <Grid item>{value.phone}</Grid>
+                        <span className={classes.cardHeadings}>Phone:</span>
+                        <br />
+                        {value.phone}{" "}
                       </Typography>
                       <Typography>
-                        <Grid item>
-                          <span className={classes.cardHeadings}>
-                            Blood Group:
-                          </span>
-                        </Grid>
-                        <Grid item>{value.bgroup}</Grid>
+                        <span className={classes.cardHeadings}>
+                          Blood Group:
+                        </span>
+                        <br />
+                        {value.bgroup}
                       </Typography>
                     </CardContent>
                   </Card>
