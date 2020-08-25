@@ -1,64 +1,70 @@
-import React, { useState } from "react";
-import csc from "country-state-city";
-import { Grid, makeStyles, Select, MenuItem, Button } from "@material-ui/core";
-const useStyles = makeStyles((theme) => ({
+import React, { useState } from 'react';
+import csc from 'country-state-city';
+import { Grid, makeStyles, Select, MenuItem, Button } from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
   searchBtn: {
-    color: "#ef101a",
-    "&:hover": {
-      color: "white",
-      backgroundColor: "#ef101a",
-    },
-  },
+    color: '#ef101a',
+    '&:hover': {
+      color: 'white',
+      backgroundColor: '#ef101a'
+    }
+  }
 }));
 
-const StatesAndCities = (props) => {
+const StatesAndCities = props => {
   const BloodGroup = [
-    "A+",
-    "A-",
-    "AB+",
-    "AB-",
-    "B+",
-    "B-",
-    "O+",
-    "O-",
-    "All blood groups",
+    'A+',
+    'A-',
+    'AB+',
+    'AB-',
+    'B+',
+    'B-',
+    'O+',
+    'O-',
+    'All blood groups'
   ];
   const classes = useStyles();
-  const stateList = csc.getStatesOfCountry("101");
-
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [bg, setBloodGroup] = useState("");
-
+  const stateList = csc.getStatesOfCountry('101');
+  const [state, setState] = useState('');
+  const [city, setCity] = useState('');
+  const [bg, setBloodGroup] = useState('');
   const cityList = csc.getCitiesOfState(state);
 
-  const handleChaangeState = (event) => {
-    setState(event.target.value);
+  const handleChaangeState = event => {
+    const { value } = event.target;
+    setState(value);
+    const { name: stateName } = csc.getStateById(value);
+    console.log(stateName)
   };
 
-  const handleChaangeCity = (event) => {
-    setCity(event.target.value);
+  const handleChangeCity = event => {
+    const { value } = event.target;
+    setCity(value);
   };
 
-  const handleChangeBG = (event) => {
-    setBloodGroup(event.target.value);
+  const handleChangeBG = event => {
+    const { value } = event.target;
+    setBloodGroup(value);
   };
+
   return (
-    <>
-      <Grid container justify="center" alignItems="center" spacing={4}>
+    <React.Fragment>
+      <Grid container justify='center' alignItems='center' spacing={4}>
         <Grid item xs={12} sm={4} md={3}>
           <Select
             fullWidth
+            name='states'
             displayEmpty
-            variant="outlined"
-            labelId="demo-simple-select-label"
+            variant='outlined'
+            labelId='demo-simple-select-label'
             value={state}
             onChange={handleChaangeState}
           >
-            <MenuItem value="" disabled>
+            <MenuItem value='' disabled>
               State
             </MenuItem>
-            {stateList.map((val) => (
+            {stateList.map(val => (
               <MenuItem key={val.id} value={val.id}>
                 {val.name}
               </MenuItem>
@@ -69,16 +75,16 @@ const StatesAndCities = (props) => {
           <Select
             fullWidth
             displayEmpty
-            variant="outlined"
-            labelId="demo-simple-select-label"
-            id="gender"
+            variant='outlined'
+            labelId='demo-simple-select-label'
+            name='city'
             value={city}
-            onChange={handleChaangeCity}
+            onChange={handleChangeCity}
           >
-            <MenuItem value="" disabled>
+            <MenuItem value='' disabled>
               Cities
             </MenuItem>
-            {cityList.map((val) => (
+            {cityList.map(val => (
               <MenuItem key={val.id} value={val.name}>
                 {val.name}
               </MenuItem>
@@ -89,16 +95,16 @@ const StatesAndCities = (props) => {
           <Select
             fullWidth
             displayEmpty
-            variant="outlined"
-            labelId="demo-simple-select-label"
-            id="bloodGroup"
+            variant='outlined'
+            labelId='demo-simple-select-label'
+            name='bgroup'
             value={bg}
             onChange={handleChangeBG}
           >
-            <MenuItem value="" disabled>
+            <MenuItem value='' disabled>
               Blood Group
             </MenuItem>
-            {BloodGroup.map((val) => (
+            {BloodGroup.map(val => (
               <MenuItem key={val} value={val}>
                 {val}
               </MenuItem>
@@ -106,12 +112,12 @@ const StatesAndCities = (props) => {
           </Select>
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
-          <Button variant="outlined" className={classes.searchBtn}>
+          <Button variant='outlined' className={classes.searchBtn}>
             SEARCH
           </Button>
         </Grid>
       </Grid>
-    </>
+    </React.Fragment>
   );
 };
 export default StatesAndCities;

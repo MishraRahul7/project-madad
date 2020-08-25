@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Grid,
   Typography,
@@ -7,179 +7,197 @@ import {
   makeStyles,
   TextField,
   Paper,
-  Button,
-} from "@material-ui/core";
+  Button
+} from '@material-ui/core';
 
-import { Select } from "formik-material-ui";
-import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
-import { signUp } from "../actions";
-import moment from "moment";
-import { SyncLoader } from "react-spinners";
-import Notification from "../container/Notification";
+import { Select } from 'formik-material-ui';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import { signUp } from '../actions';
+import { SyncLoader } from 'react-spinners';
+import Notification from '../container/Notification';
 const PersonalDetailsSchema = Yup.object().shape({
   fname: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
   lname: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
   ftrname: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  dob: Yup.date().required("Required"),
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  dob: Yup.date().required('Required'),
   age: Yup.number()
-    .min(17, "You are not eligible")
-    .max(65, "You are not eligible!")
-    .required("Required"),
+    .min(17, 'You are not eligible')
+    .max(65, 'You are not eligible!')
+    .required('Required'),
   weight: Yup.number()
-    .min(45, "You are not eligible")
-    .max(110, "You are not eligible!")
-    .required("Required"),
-  gender: Yup.string().required("Required"),
-  occupation: Yup.string().required("Required"),
-  bgroup: Yup.string().required("Required"),
-  phone: Yup.number().min(10).required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+    .min(45, 'You are not eligible')
+    .max(110, 'You are not eligible!')
+    .required('Required'),
+  gender: Yup.string().required('Required'),
+  occupation: Yup.string().required('Required'),
+  bgroup: Yup.string().required('Required'),
+  phone: Yup.number()
+    .min(10)
+    .required('Required'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required('Required'),
   password: Yup.string()
-    .min(6, "Password too short")
-    .max(20, "Password too long")
-    .required("Required"),
+    .min(6, 'Password too short')
+    .max(20, 'Password too long')
+    .required('Required'),
   address: Yup.string()
-    .required("Required")
-    .max(100, "Too Long")
-    .min(5, "Too short"),
-  states: Yup.string().required("Required"),
-  city: Yup.string().required("Required"),
+    .required('Required')
+    .max(100, 'Too Long')
+    .min(5, 'Too short'),
+  states: Yup.string().required('Required'),
+  city: Yup.string().required('Required')
 });
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   Reglayout: {
-    width: "auto",
+    width: 'auto',
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
       width: 600,
-      marginLeft: "auto",
-      marginRight: "auto",
-    },
+      marginLeft: 'auto',
+      marginRight: 'auto'
+    }
   },
   Regpaper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
-    borderRadius: "10px",
+    borderRadius: '10px',
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
-      padding: theme.spacing(3),
-    },
+      padding: theme.spacing(3)
+    }
   },
   SubmitButton: {
-    color: "white",
-    backgroundColor: "#811C14",
-    "&:hover": {
-      backgroundColor: "#ac1c14",
-    },
-  },
+    color: 'white',
+    backgroundColor: '#811C14',
+    '&:hover': {
+      backgroundColor: '#ac1c14'
+    }
+  }
 }));
 
-const RegForm = (props) => {
+const RegForm = props => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const bgroup = ["A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"];
+  const bgroup = ['A+', 'A-', 'AB+', 'AB-', 'B+', 'B-', 'O+', 'O-'];
+  const [correctAge, setCorrectAge] = useState('');
   const occupation = [
-    "Student",
-    "Business",
-    "Professional",
-    "Self Employed",
-    "Government Employee",
-    "Armed Forces",
-    "Retired",
-    "Other",
+    'Student',
+    'Business',
+    'Professional',
+    'Self Employed',
+    'Government Employee',
+    'Armed Forces',
+    'Retired',
+    'Other'
   ];
   const states = [
-    "Andaman and Nicobar Islands",
-    "Andhra Pradesh",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chandigarh",
-    "Chhattisgarh",
-    "Dadra and Nagar Haveli",
-    "Daman and Diu",
-    "Delhi",
-    "Goa",
-    "Gujarat",
-    "Haryana",
-    "Himachal Pradesh",
-    "Jammu and Kashmir",
-    "Jharkhand",
-    "Karnataka",
-    "Kerala",
-    "Lakshadweep",
-    "Madhya Pradesh",
-    "Maharashtra",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Orissa",
-    "Pondicherry",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "Tamil Nadu",
-    "Telangana",
-    "Tripura",
-    "Uttaranchal",
-    "Uttar Pradesh",
-    "West Bengal",
+    'Andaman and Nicobar Islands',
+    'Andhra Pradesh',
+    'Arunachal Pradesh',
+    'Assam',
+    'Bihar',
+    'Chandigarh',
+    'Chhattisgarh',
+    'Dadra and Nagar Haveli',
+    'Daman and Diu',
+    'Delhi',
+    'Goa',
+    'Gujarat',
+    'Haryana',
+    'Himachal Pradesh',
+    'Jammu and Kashmir',
+    'Jharkhand',
+    'Karnataka',
+    'Kerala',
+    'Lakshadweep',
+    'Madhya Pradesh',
+    'Maharashtra',
+    'Manipur',
+    'Meghalaya',
+    'Mizoram',
+    'Nagaland',
+    'Orissa',
+    'Pondicherry',
+    'Punjab',
+    'Rajasthan',
+    'Sikkim',
+    'Tamil Nadu',
+    'Telangana',
+    'Tripura',
+    'Uttaranchal',
+    'Uttar Pradesh',
+    'West Bengal'
   ];
 
+  const handleSelcet = val => {
+    const dateString = document.getElementById('dob').value;
+   function getAge(dateString){
+      var today = new Date();
+      var birthDate = new Date(dateString);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    }
+    setCorrectAge(getAge(dateString));
+  };
+
+  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  useEffect(() => {}, [open]);
 
   return (
     <React.Fragment>
-      <Grid container justify="center" alignItems="center">
+      <Grid container justify='center' alignItems='center'>
         <main className={classes.Reglayout}>
           <Paper elevation={5} className={classes.Regpaper}>
             <Typography
-              component="h1"
-              variant="h4"
-              align="center"
-              style={{ paddingBottom: "10px" }}
+              component='h1'
+              variant='h4'
+              align='center'
+              style={{ paddingBottom: '10px' }}
             >
               Registration
             </Typography>
             <Formik
               initialValues={{
-                fname: "",
-                lname: "",
-                ftrname: "",
-                dob: "",
-                age: "",
-                weight: "",
-                gender: "",
-                occupation: "",
-                bgroup: "",
-                phone: "",
-                email: "",
-                password: "",
-                address: "",
-                city: "",
-                states: "",
+                fname: '',
+                lname: '',
+                ftrname: '',
+                dob: '',
+                age: '',
+                weight: '',
+                gender: '',
+                occupation: '',
+                bgroup: '',
+                phone: '',
+                email: '',
+                password: '',
+                address: '',
+                city: '',
+                states: ''
               }}
               validationSchema={PersonalDetailsSchema}
-              onSubmit={async (values) => {
+              onSubmit={async values => {
                 setLoading(true);
-
-                let newDate = moment(values.dob).format("YYYY-MM-DD ");
-                console.log(newDate);
-                await dispatch(signUp({ ...values, newDate }));
-                console.log(values);
+                setOpen(true);
+                await dispatch(signUp(values));
                 setLoading(false);
               }}
             >
@@ -188,43 +206,43 @@ const RegForm = (props) => {
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="fname"
+                        id='fname'
                         error={errors.fname && touched.fname}
                         onChange={handleChange}
                         helperText={
                           errors.fname && touched.fname ? errors.fname : null
                         }
-                        name="fname"
-                        label="First Name"
+                        name='fname'
+                        label='First Name'
                         fullWidth
-                        variant="outlined"
-                        autoComplete="off"
+                        variant='outlined'
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="lname"
+                        id='lname'
                         error={errors.lname && touched.lname}
                         onChange={handleChange}
                         helperText={
                           errors.lname && touched.lname ? errors.lname : null
                         }
-                        name="lname"
-                        label="Last Name"
-                        variant="outlined"
+                        name='lname'
+                        label='Last Name'
+                        variant='outlined'
                         fullWidth
-                        autoComplete="off"
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="ftrname"
+                        id='ftrname'
                         error={errors.ftrname && touched.ftrname}
                         onChange={handleChange}
                         helperText={
@@ -232,69 +250,71 @@ const RegForm = (props) => {
                             ? errors.ftrname
                             : null
                         }
-                        name="ftrname"
+                        name='ftrname'
                         label="Father's name"
-                        variant="outlined"
+                        variant='outlined'
                         fullWidth
-                        autoComplete="off"
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="dob"
+                        id='dob'
                         error={errors.dob && touched.dob}
                         onChange={handleChange}
                         helperText={
                           errors.dob && touched.dob ? errors.dob : null
                         }
-                        name="dob"
-                        type="date"
-                        variant="outlined"
+                        name='dob'
+                        type='date'
+                        variant='outlined'
                         fullWidth
-                        autoComplete="off"
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="age"
+                        id='age'
                         error={errors.age && touched.age}
                         onChange={handleChange}
                         helperText={
                           errors.age && touched.age ? errors.age : null
                         }
-                        name="age"
-                        label="Age"
-                        type="number"
-                        variant="outlined"
+                        name='age'
+                        label='Age'
+                        type='number'
+                        variant='outlined'
                         fullWidth
-                        autoComplete="off"
+                        value={correctAge}
+                        onSelect={handleSelcet}
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="weight"
+                        id='weight'
                         error={errors.weight && touched.weight}
                         onChange={handleChange}
                         helperText={
                           errors.weight && touched.weight ? errors.weight : null
                         }
-                        name="weight"
-                        label="Weight"
-                        type="number"
-                        variant="outlined"
+                        name='weight'
+                        label='Weight'
+                        type='number'
+                        variant='outlined'
                         fullWidth
-                        autoComplete="off"
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
@@ -302,56 +322,56 @@ const RegForm = (props) => {
                       <Field
                         component={Select}
                         onChange={handleChange}
-                        name="gender"
-                        variant="outlined"
+                        name='gender'
+                        variant='outlined'
                         value={values.gender}
                         fullWidth
                         displayEmpty
                       >
-                        <MenuItem value="" disabled>
+                        <MenuItem value='' disabled>
                           Gender
                         </MenuItem>
-                        <MenuItem value="Male">Male</MenuItem>
-                        <MenuItem value="Female">Female</MenuItem>
-                        <MenuItem value="Other">Other</MenuItem>
+                        <MenuItem value='Male'>Male</MenuItem>
+                        <MenuItem value='Female'>Female</MenuItem>
+                        <MenuItem value='Other'>Other</MenuItem>
                       </Field>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Field
                         component={Select}
-                        id="occupation"
+                        id='occupation'
                         error={errors.occupation && touched.occupation}
                         onChange={handleChange}
-                        name="occupation"
-                        variant="outlined"
+                        name='occupation'
+                        variant='outlined'
                         displayEmpty
                         fullWidth
                       >
-                        <MenuItem value="" disabled>
+                        <MenuItem value='' disabled>
                           Occupation
                         </MenuItem>
-                        {occupation.map((val) => (
+                        {occupation.map(val => (
                           <MenuItem key={val} value={val}>
                             {val}
                           </MenuItem>
                         ))}
                       </Field>
-                    </Grid>{" "}
+                    </Grid>{' '}
                     <Grid item xs={12} sm={6}>
                       <Field
-                        id="bgroup"
+                        id='bgroup'
                         component={Select}
                         error={errors.bgroup && touched.bgroup}
                         onChange={handleChange}
                         displayEmpty
                         fullWidth
-                        name="bgroup"
-                        variant="outlined"
+                        name='bgroup'
+                        variant='outlined'
                       >
-                        <MenuItem value="" disabled>
+                        <MenuItem value='' disabled>
                           Blood Group
                         </MenuItem>
-                        {bgroup.map((val) => (
+                        {bgroup.map(val => (
                           <MenuItem key={val} value={val}>
                             {val}
                           </MenuItem>
@@ -360,43 +380,43 @@ const RegForm = (props) => {
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="phone"
+                        id='phone'
                         error={errors.phone && touched.phone}
                         onChange={handleChange}
                         helperText={
                           errors.phone && touched.phone ? errors.phone : null
                         }
-                        name="phone"
-                        label="Phone"
+                        name='phone'
+                        label='Phone'
                         fullWidth
-                        variant="outlined"
-                        autoComplete="off"
+                        variant='outlined'
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="email"
+                        id='email'
                         error={errors.email && touched.email}
                         onChange={handleChange}
                         helperText={
                           errors.email && touched.email ? errors.email : null
                         }
-                        name="email"
-                        label="Email"
+                        name='email'
+                        label='Email'
                         fullWidth
-                        variant="outlined"
-                        autoComplete="off"
+                        variant='outlined'
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
-                        id="password"
+                        id='password'
                         error={errors.password && touched.password}
                         onChange={handleChange}
                         helperText={
@@ -404,20 +424,20 @@ const RegForm = (props) => {
                             ? errors.password
                             : null
                         }
-                        name="password"
-                        label="Password"
-                        type="password"
+                        name='password'
+                        label='Password'
+                        type='password'
                         fullWidth
-                        variant="outlined"
-                        autoComplete="off"
+                        variant='outlined'
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={12}>
                       <TextField
-                        id="address"
+                        id='address'
                         error={errors.address && touched.address}
                         onChange={handleChange}
                         helperText={
@@ -425,31 +445,31 @@ const RegForm = (props) => {
                             ? errors.address
                             : null
                         }
-                        name="address"
-                        label="Address"
+                        name='address'
+                        label='Address'
                         fullWidth
-                        variant="outlined"
-                        autoComplete="off"
+                        variant='outlined'
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                       <Field
                         component={Select}
-                        id="states"
+                        id='states'
                         error={errors.states && touched.states}
-                        name="states"
+                        name='states'
                         fullWidth
                         displayEmpty
                         onChange={handleChange}
-                        variant="outlined"
+                        variant='outlined'
                       >
-                        <MenuItem value="" disabled>
+                        <MenuItem value='' disabled>
                           State
                         </MenuItem>
-                        {states.map((val) => (
+                        {states.map(val => (
                           <MenuItem key={val} value={val}>
                             {val}
                           </MenuItem>
@@ -463,26 +483,26 @@ const RegForm = (props) => {
                         helperText={
                           errors.city && touched.city ? errors.city : null
                         }
-                        name="city"
-                        label="City"
+                        name='city'
+                        label='City'
                         fullWidth
-                        variant="outlined"
-                        autoComplete="off"
+                        variant='outlined'
+                        autoComplete='off'
                         InputLabelProps={{
-                          style: { color: "black" },
+                          style: { color: 'black' }
                         }}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={12} style={{ textAlign: "right" }}>
+                    <Grid item xs={12} sm={12} style={{ textAlign: 'right' }}>
                       <Button
                         className={classes.SubmitButton}
-                        size="large"
-                        type="submit"
-                        variant="outlined"
+                        size='large'
+                        type='submit'
+                        variant='outlined'
                         disabled={loading}
                       >
                         {loading ? (
-                          <SyncLoader size={10} color={"#fff"} />
+                          <SyncLoader size={10} color={'#fff'} />
                         ) : (
                           <span>Submit</span>
                         )}
@@ -494,7 +514,7 @@ const RegForm = (props) => {
             </Formik>
           </Paper>
         </main>
-        <Notification message="Thank You" />;
+        <Notification open={open} message={'Thank You for become a donor!'} />
       </Grid>
     </React.Fragment>
   );

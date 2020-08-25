@@ -38,7 +38,6 @@ export const signIn = (values) => async (dispatch) => {
       type: SIGN_IN,
       payload: response.data,
     });
-    alert("Sign In Successful!");
     history.push("/");
   } catch (e) {
     alert("please enter correct credentials");
