@@ -6,11 +6,12 @@ import {
   GET_USER,
   GET_ALL_USER,
   DELETE_DONOR,
-} from "../actions/types";
+  FILTER_DATA
+} from '../actions/types';
 const INITIAL_STATE = {
   isSignedIn: null,
   user: null,
-  users: [],
+  users: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -28,6 +29,9 @@ export default (state = INITIAL_STATE, action) => {
     case GET_USER:
       return { ...state, isSignedIn: true, user: action.payload };
     case GET_ALL_USER:
+      return { ...state, users: action.payload };
+
+    case FILTER_DATA:
       return { ...state, users: action.payload };
     default:
       return state;

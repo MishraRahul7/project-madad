@@ -168,7 +168,7 @@ const SignIn = () => {
           </Paper>
         </Grid>
       </Grid>
-      <Notification open={open} message={'Welcome Back!'}/>
+      <Notification open={open} message={'Welcome Back!'} />
     </div>
   );
 };
