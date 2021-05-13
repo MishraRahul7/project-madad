@@ -89,87 +89,87 @@ const NavBarP = () => {
               <img className={classes.logoProp} src={logo} alt="Madad" />
             </Link>
           </Typography>
-//           <nav>
-//             <Hidden only="xs">
-//               <Link
-//                 to="/find-donor"
-//                 onClick={handleClose}
-//                 className={classes.link}
-//               >
-//                 Find Donor
-//               </Link>
-//               <Link
-//                 to="/profile"
-//                 onClick={handleClose}
-//                 className={classes.link}
-//               >
-//                 Profile
-//               </Link>
+/*          <nav>
+            <Hidden only="xs">
+              <Link
+                to="/find-donor"
+                onClick={handleClose}
+                className={classes.link}
+              >
+                Find Donor
+              </Link>
+              <Link
+                to="/profile"
+                onClick={handleClose}
+                className={classes.link}
+              >
+                Profile
+              </Link>
 
-//               <Link
-//                 to="#"
-//                 className={classes.link}
-//                 onClick={() => {
-//                   dispatch(signOut());
-//                 }}
-//               >
-//                 Logout
-//               </Link>
-//             </Hidden>
-//           </nav>
+              <Link
+                to="#"
+                className={classes.link}
+                onClick={() => {
+                  dispatch(signOut());
+                }}
+              >
+                Logout
+              </Link>
+            </Hidden>
+          </nav>
 
-//           <Hidden mdUp smUp>
-//             <IconButton
-//               edge="start"
-//               onClick={handleClick}
-//               className={classes.menuIcon}
-//               color="inherit"
-//               aria-label="menu"
-//             >
-//               <MenuIcon />
-//             </IconButton>
-//           </Hidden>
-//           <Menu
-//             id="simple-menu"
-//             anchorEl={anchorEl}
-//             keepMounted
-//             open={Boolean(anchorEl)}
-//             onClose={handleClose}
-//           >
-//             <MenuItem onClick={handleClose}>
-//               <Link to="/" onClick={handleClose} className={classes.link1}>
-//                 Home
-//               </Link>
-//             </MenuItem>
-//             <MenuItem onClick={handleClose}>
-//               <Link
-//                 to="/find-donor"
-//                 onClick={handleClose}
-//                 className={classes.link1}
-//               >
-//                 Find Donor
-//               </Link>
-//             </MenuItem>
-//             <MenuItem onClick={handleClose}>
-//               <Link
-//                 to="/profile"
-//                 onClick={handleClose}
-//                 className={classes.link1}
-//               >
-//                 Profile
-//               </Link>
-//             </MenuItem>
-//             <MenuItem onClick={handleClose}>
-//               <Link
-//                 to="#"
-//                 onClick={() => {
-//                   dispatch(signOut());
-//                 }}
-//               >
-//                 Logout
-//               </Link>
-//             </MenuItem>
-//           </Menu>
+          <Hidden mdUp smUp>
+            <IconButton
+              edge="start"
+              onClick={handleClick}
+              className={classes.menuIcon}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>
+              <Link to="/" onClick={handleClose} className={classes.link1}>
+                Home
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link
+                to="/find-donor"
+                onClick={handleClose}
+                className={classes.link1}
+              >
+                Find Donor
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link
+                to="/profile"
+                onClick={handleClose}
+                className={classes.link1}
+              >
+                Profile
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link
+                to="#"
+                onClick={() => {
+                  dispatch(signOut());
+                }}
+              >
+                Logout
+              </Link>
+            </MenuItem>
+          </Menu>*/
         </Toolbar>
       </AppBar>
     </React.Fragment>
