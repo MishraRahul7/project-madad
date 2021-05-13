@@ -89,7 +89,7 @@ const NavBarP = () => {
               <img className={classes.logoProp} src={logo} alt="Madad" />
             </Link>
           </Typography>
-/*          <nav>
+    {/*          <nav>
             <Hidden only="xs">
               <Link
                 to="/find-donor"
@@ -169,7 +169,7 @@ const NavBarP = () => {
                 Logout
               </Link>
             </MenuItem>
-          </Menu>*/
+          </Menu>*/}
         </Toolbar>
       </AppBar>
     </React.Fragment>
