@@ -86,73 +86,73 @@ const NavBar = () => {
             </Link>
           </Typography>
 /*           <nav>
-//             <Hidden only="xs">
-//               <Link
-//                 to="/find-donor"
-//                 onClick={handleClose}
-//                 className={classes.link}
-//               >
-//                 Find Donor
-//               </Link>
-//               <Link
-//                 to="/registration"
-//                 onClick={handleClose}
-//                 className={classes.link}
-//               >
-//                 Become A Donor
-//               </Link>
-//               <Link to="/signin" onClick={handleClose} className={classes.link}>
-//                 Login
-//               </Link>
-//             </Hidden>
-//           </nav>
-//           <Hidden mdUp smUp>
-//             <IconButton
-//               edge="start"
-//               className={classes.menuIcon}
-//               color="inherit"
-//               aria-label="menu"
-//               onClick={handleClick}
-//             >
-//               <MenuIcon />
-//             </IconButton>
+            <Hidden only="xs">
+              <Link
+                to="/find-donor"
+                onClick={handleClose}
+                className={classes.link}
+              >
+                Find Donor
+              </Link>
+              <Link
+                to="/registration"
+                onClick={handleClose}
+                className={classes.link}
+              >
+                Become A Donor
+              </Link>
+              <Link to="/signin" onClick={handleClose} className={classes.link}>
+                Login
+              </Link>
+            </Hidden>
+          </nav>
+          <Hidden mdUp smUp>
+            <IconButton
+              edge="start"
+              className={classes.menuIcon}
+              color="inherit"
+              aria-label="menu"
+              onClick={handleClick}
+            >
+              <MenuIcon />
+            </IconButton>
 
-//             <Menu
-//               anchorEl={anchorEl}
-//               keepMounted
-//               open={Boolean(anchorEl)}
-//               onClose={handleClose}
-//             >
-//               <MenuItem>
-//                 <Link
-//                   to="/find-donor"
-//                   onClick={handleClose}
-//                   className={classes.link1}
-//                 >
-//                   Find Donor
-//                 </Link>
-//               </MenuItem>
+            <Menu
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem>
+                <Link
+                  to="/find-donor"
+                  onClick={handleClose}
+                  className={classes.link1}
+                >
+                  Find Donor
+                </Link>
+              </MenuItem>
 
-//               <MenuItem>
-//                 <Link
-//                   to="/registration"
-//                   onClick={handleClose}
-//                   className={classes.link1}
-//                 >
-//                   Become A Donor
-//                 </Link>
-//               </MenuItem>
+              <MenuItem>
+                <Link
+                  to="/registration"
+                  onClick={handleClose}
+                  className={classes.link1}
+                >
+                  Become A Donor
+                </Link>
+              </MenuItem>
 
-//               <MenuItem>
-//                 <Link
-//                   to="/signin"
-//                   onClick={handleClose}
-//                   className={classes.link1}
-//                 >
-//                   Login
-//                 </Link>
-//               </MenuItem>
-//             </Menu>
+              <MenuItem>
+                <Link
+                  to="/signin"
+                  onClick={handleClose}
+                  className={classes.link1}
+                >
+                  Login
+                </Link>
+              </MenuItem>
+            </Menu>
           </Hidden>*/
         </Toolbar>
       </AppBar>
