@@ -145,18 +145,18 @@ const Home = () => {
         </Grid>
         {/*End Middle*/}
         {/*Footer*/}
-        <Grid item xs={12} elivation={5} className={classes.footer}>
-          <Copyright />
-          <Typography variant="subtitle1" align="center">
-            Made With{" "}
-            <span role="img" aria-label="heart">
-              ❤️
-            </span>{" "}
-            <Link color="inherit" href="https://reactjs.org/">
-              ReactJS
-            </Link>
-          </Typography>
-        </Grid>
+        // <Grid item xs={12} elivation={5} className={classes.footer}>
+        //   <Copyright />
+        //   <Typography variant="subtitle1" align="center">
+        //     Made With{" "}
+        //     <span role="img" aria-label="heart">
+        //       ❤️
+        //     </span>{" "}
+        //     <Link color="inherit" href="https://reactjs.org/">
+        //       ReactJS
+        //     </Link>
+        //   </Typography>
+        // </Grid>
         {/* End footer */}
       </Grid>
     </React.Fragment>
