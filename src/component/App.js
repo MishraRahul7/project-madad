@@ -21,7 +21,7 @@ const App = () => {
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/signin" render={() => <SignIn />} />
           <Route exact path="/registration" render={() => <Registration />} />
-          <Route exact path="/find-donor" render={() => <FindDonor />} />
+          // <Route exact path="/find-donor" render={() => <FindDonor />} />
           <Route exact path="/profile" render={() => <Profile />} />
         </Switch>
       </>
