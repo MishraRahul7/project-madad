@@ -267,18 +267,18 @@ const FindDonor = () => {
           </Container>
         </Grid>
         {/* Footer */}
-        <Grid elivation={6} item xs={12} className={classes.footer}>
-          <Copyright />
-          <Typography variant='subtitle1' align='center'>
-            Made With{' '}
-            <span role='img' aria-label='heart'>
-              ❤️
-            </span>{' '}
-            <Link color='inherit' href='https://reactjs.org/'>
-              ReactJS
-            </Link>
-          </Typography>
-        </Grid>
+        // <Grid elivation={6} item xs={12} className={classes.footer}>
+        //   <Copyright />
+        //   <Typography variant='subtitle1' align='center'>
+        //     Made With{' '}
+        //     <span role='img' aria-label='heart'>
+        //       ❤️
+        //     </span>{' '}
+        //     <Link color='inherit' href='https://reactjs.org/'>
+        //       ReactJS
+        //     </Link>
+        //   </Typography>
+        // </Grid>
         {/* End footer */}
       </Grid>
     </React.Fragment>
