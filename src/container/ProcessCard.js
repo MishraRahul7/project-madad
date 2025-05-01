@@ -1,54 +1,44 @@
 import React from "react";
-import {
-  Card,
-  Grid,
-  CardContent,
-  CardMedia,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Card, Grid, CardContent, CardMedia, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    backgroundColor: "#b40008",
-    color: "#0D0D0D",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  cardContent: {
-    flexGrow: 1,
-    color: "white",
-  },
-  cardMedia: {
-    paddingTop: "56.25%", // 16:9
-  },
-
-  cardGrid: {
-    padding: theme.spacing(2),
-  },
-  btn: {
-    color: "white",
-    borderColor: "white",
-  },
+const CardContainer = styled(Grid)(({ theme }) => ({
+  padding: theme.spacing(2),
 }));
-const ProcessCard = (props) => {
-  const classes = useStyles();
 
+const StyledCard = styled(Card)({
+  backgroundColor: "#b40008",
+  color: "#0D0D0D",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+});
+
+const StyledCardContent = styled(CardContent)({
+  flexGrow: 1,
+  color: "white",
+});
+
+const StyledCardMedia = styled(CardMedia)({
+  paddingTop: "56.25%", // 16:9 aspect ratio
+});
+
+const ProcessCard = (props) => {
   return (
     <React.Fragment>
-      <Grid container className={classes.cardGrid}>
-        <Card className={classes.card}>
-          <CardMedia className={classes.cardMedia} image={props.img} />
-          <CardContent className={classes.cardContent}>
+      <CardContainer container>
+        <StyledCard>
+          <StyledCardMedia image={props.img} />
+          <StyledCardContent>
             <Typography gutterBottom variant="h4">
               {props.heading}
             </Typography>
             <Typography>{props.body}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
+          </StyledCardContent>
+        </StyledCard>
+      </CardContainer>
     </React.Fragment>
   );
 };
+
 export default ProcessCard;
