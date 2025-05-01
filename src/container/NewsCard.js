@@ -1,67 +1,56 @@
 import React from "react";
-import {
-  Card,
-  Grid,
-  Button,
-  CardActions,
-  CardContent,
-  CardMedia,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Card, Grid, Button, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { styled } from "@mui/system";
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    backgroundColor: "#b40008",
-    color: "#0D0D0D",
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  cardContent: {
-    flexGrow: 1,
-    color: "white",
-  },
-  cardMedia: {
-    paddingTop: "56.25%", // 16:9
-  },
-
-  cardGrid: {
-    padding: theme.spacing(2),
-  },
-  btn: {
-    color: "white",
-    borderColor: "white",
-  },
+const CardContainer = styled(Grid)(({ theme }) => ({
+  padding: theme.spacing(2),
 }));
-const NewsCard = (props) => {
-  const classes = useStyles();
 
+const StyledCard = styled(Card)({
+  backgroundColor: "#b40008",
+  color: "#0D0D0D",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+});
+
+const StyledCardContent = styled(CardContent)({
+  flexGrow: 1,
+  color: "white",
+});
+
+const StyledCardMedia = styled(CardMedia)({
+  paddingTop: "56.25%", // 16:9 aspect ratio
+});
+
+const StyledButton = styled(Button)({
+  color: "white",
+  borderColor: "white",
+});
+
+const NewsCard = (props) => {
   return (
     <React.Fragment>
-      <Grid container className={classes.cardGrid}>
-        <Card className={classes.card}>
-          <CardMedia
-            className={classes.cardMedia}
-            image="https://source.unsplash.com/random"
-          />
-          <CardContent className={classes.cardContent}>
+      <CardContainer container>
+        <StyledCard>
+          <StyledCardMedia image="https://source.unsplash.com/random" />
+          <StyledCardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {props.heading}
             </Typography>
             <Typography>
-              This is a media card. You can use this section to describe the
-              content.
+              This is a media card. You can use this section to describe the content.
             </Typography>
-          </CardContent>
+          </StyledCardContent>
           <CardActions>
-            <Button variant="outlined" size="small" className={classes.btn}>
+            <StyledButton variant="outlined" size="small">
               View full news
-            </Button>
+            </StyledButton>
           </CardActions>
-        </Card>
-      </Grid>
+        </StyledCard>
+      </CardContainer>
     </React.Fragment>
   );
 };
+
 export default NewsCard;
