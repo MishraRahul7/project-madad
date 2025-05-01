@@ -22,9 +22,9 @@ const NavBarP = () => {
         <Navbar.Toggle aria-controls='main-navbar' />
         <Navbar.Collapse id='main-navbar'>
           <Nav className='ms-auto text-uppercase'>
-            <Nav.Link as={Link} to='/'>
+            {/* <Nav.Link as={Link} to='/'>
               Home
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link as={Link} to='/find-donor'>
               Find Donor
             </Nav.Link>
