@@ -1,35 +1,40 @@
-import { configureStore } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
-import { persistReducer, persistStore } from "redux-persist";
-import authReducer from "./slice/authSlice";
-import rootSaga from "./rootSaga";
-import storage from "redux-persist/lib/storage";
+import { configureStore } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+import authReducer from './slice/authSlice';
+import userReducer from './slice/userSlice';
+import donorReducer from './slice/donorSlice';
+// <-- add this line
+import rootSaga from './rootSaga';
 
 // Create the saga middleware
 const saga = createSagaMiddleware();
 
 // Persist config
 const authPersistConfig = {
-  key: "auth",
+  key: 'auth',
   storage
 };
 
-// Wrap the reducer with persist
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 // Configure store
 export const store = configureStore({
   reducer: {
-    auth: persistedAuthReducer
+    auth: persistedAuthReducer,
+    user: userReducer,
+    donor: donorReducer // <-- add user reducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
-      serializableCheck: false // Disable if persist causes warnings
+      serializableCheck: false
     }).concat(saga)
 });
 
 // Run the saga
 saga.run(rootSaga);
 
-// Persistor for redux-persist
+// Persistor
 export const persistor = persistStore(store);

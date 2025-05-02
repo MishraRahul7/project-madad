@@ -2,117 +2,125 @@ import {
   SIGN_IN,
   SIGN_UP,
   SIGN_OUT,
-  DELETE_DONOR,
-  UPDATE_DONOR,
   GET_USER,
-  GET_ALL_USER,
+  GET_ALL_USERS,
+  GET_SINGLE_USER,
+  CREATE_USER,
+  UPDATE_USER,
+  DELETE_USER,
   FILTER_DATA
 } from './types';
 import history from '../history';
 import apis from '../apis/apis';
 
+// Signup
 export const signUp = values => async dispatch => {
-  let response;
   try {
-    response = await apis.post('/users/add', values);
+    const response = await apis.post('/users/add', values);
     if (response.status === 201) {
       localStorage.setItem('jwt', response.data.token);
     }
-    dispatch({
-      type: SIGN_UP,
-      payload: response.data
-    });
+    dispatch({ type: SIGN_UP, payload: response.data });
     history.push('/signin');
   } catch (e) {
-    alert('Something went wrong');
+    alert('Something went wrong during registration');
   }
 };
 
+// Signin
 export const signIn = values => async dispatch => {
-  let response;
   try {
-    response = await apis.post('/users/login', values);
+    const response = await apis.post('/users/login', values);
     if (response.status === 200) {
       localStorage.setItem('jwt', response.data.token);
     }
-    dispatch({
-      type: SIGN_IN,
-      payload: response.data
-    });
+    dispatch({ type: SIGN_IN, payload: response.data });
     history.push('/');
   } catch (e) {
-    alert('please enter correct credentials');
+    alert('Please enter correct credentials');
   }
 };
 
+// Get logged-in user
 export const getUser = () => async dispatch => {
-  const response = await apis.get(
-    '/users/me',
-    (apis.defaults.headers.common['Authorization'] =
-      'Bearer ' + localStorage.getItem('jwt'))
-  );
-  dispatch({
-    type: GET_USER,
-    payload: response.data
-  });
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  const response = await apis.get('/users/me');
+  dispatch({ type: GET_USER, payload: response.data });
   history.push('/profile');
 };
 
-export const getAllUser = () => async dispatch => {
-  const response = await apis.get('/users/list');
-  dispatch({
-    type: GET_ALL_USER,
-    payload: response.data
-  });
-  history.push('/find-donor');
+// Get all users
+export const getAllUsers = () => async dispatch => {
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  const response = await apis.get('/users');
+  dispatch({ type: GET_ALL_USERS, payload: response.data });
 };
 
-export const signOut = () => async dispatch => {
-  await apis.post(
-    '/users/logout',
-    (apis.defaults.headers.common['Authorization'] =
-      'Bearer ' + localStorage.getItem('jwt'))
-  );
-  localStorage.removeItem('jwt');
-  dispatch({
-    type: SIGN_OUT
-  });
-  history.push('/');
-  console.log('Logout');
+// Get user by ID
+export const getUserById = id => async dispatch => {
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  const response = await apis.get(`/users/${id}`);
+  dispatch({ type: GET_SINGLE_USER, payload: response.data });
 };
 
-export const filteredData = values => async dispatch => {
-  dispatch({
-    type: FILTER_DATA,
-    payload: values
-  });
+// Create new user (Admin or reusable form)
+export const createUser = values => async dispatch => {
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  const response = await apis.post('/users/add', values);
+  dispatch({ type: CREATE_USER, payload: response.data });
 };
 
-export const deleteUser = () => async dispatch => {
-  await apis.delete(
-    '/users/me',
-    (apis.defaults.headers.common['Authorization'] =
-      'Bearer ' + localStorage.getItem('jwt'))
-  );
-  localStorage.removeItem('jwt');
-  dispatch({
-    type: DELETE_DONOR
-  });
-  alert('user is Deleted');
-  history.push('/');
-};
-
+// Update logged-in user
 export const updateUser = values => async dispatch => {
-  const response = await apis.patch(
-    '/users/me',
-    values,
-    (apis.defaults.headers.common['Authorization'] =
-      'Bearer ' + localStorage.getItem('jwt'))
-  );
-  localStorage.removeItem('jwt');
-  dispatch({
-    type: UPDATE_DONOR,
-    payload: response.data
-  });
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  const response = await apis.patch('/users/me', values);
+  dispatch({ type: UPDATE_USER, payload: response.data });
   history.push('/profile');
+};
+
+// Update user by ID
+export const updateUserById = (id, values) => async dispatch => {
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  const response = await apis.patch(`/users/${id}`, values);
+  dispatch({ type: UPDATE_USER, payload: response.data });
+};
+
+// Delete logged-in user
+export const deleteUser = () => async dispatch => {
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  await apis.delete('/users/me');
+  localStorage.removeItem('jwt');
+  dispatch({ type: DELETE_USER });
+  alert('User is deleted');
+  history.push('/');
+};
+
+// Delete user by ID
+export const deleteUserById = id => async dispatch => {
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  await apis.delete(`/users/${id}`);
+  dispatch({ type: DELETE_USER, payload: id });
+};
+
+// Logout
+export const signOut = () => async dispatch => {
+  apis.defaults.headers.common['Authorization'] =
+    'Bearer ' + localStorage.getItem('jwt');
+  await apis.post('/users/logout');
+  localStorage.removeItem('jwt');
+  dispatch({ type: SIGN_OUT });
+  history.push('/');
+};
+
+// Filter user data (in-memory)
+export const filteredData = values => dispatch => {
+  dispatch({ type: FILTER_DATA, payload: values });
 };

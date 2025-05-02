@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Row,
@@ -6,97 +6,77 @@ import {
   Card,
   Form,
   Button,
-  Alert
-} from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { City, Country, State } from "country-state-city";
+  Alert,
+  Spinner,
+  Table
+} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { City, Country, State } from 'country-state-city';
 
-// import { getAllUser, filteredData } from "../actions";
-import userImage from "../images/users.png";
-import midImage from "../images/mid.png";
-import noResultImage from "../images/no_result.png"; // <-- Assume you have a vector image for "no result"
-import findImage from "../images/find.jpg"; // <-- Assume you have a vector image for "no result"
+import userImage from '../images/users.png';
+import findImage from '../images/find.jpg';
+import { fetchUsersRequest } from '../redux/slice/userSlice';
 
 const FindDonor = () => {
   const dispatch = useDispatch();
-  const [region, setRegion] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [bg, setBloodGroup] = useState("");
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [bg, setBloodGroup] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
-  const stateList = State.getStatesOfCountry("IN");
-  const cityList = City.getCitiesOfState("IN", state);
+  const stateList = State.getStatesOfCountry('IN');
+  const cityList = City.getCitiesOfState('IN', state);
   const bloodGroups = [
-    "A+",
-    "A-",
-    "AB+",
-    "AB-",
-    "B+",
-    "B-",
-    "O+",
-    "O-",
-    "All blood groups"
+    'A+',
+    'A-',
+    'AB+',
+    'AB-',
+    'B+',
+    'B-',
+    'O+',
+    'O-',
+    'All blood groups'
   ];
 
-  const users = useSelector(state => state.auth.users) || [];
+  const { users, loading } = useSelector(state => state.user) || {
+    users: [],
+    loading: false
+  };
 
   useEffect(() => {
-    // dispatch(getAllUser());
+    dispatch(fetchUsersRequest());
   }, [dispatch]);
 
   const handleSubmit = () => {
-    setError("");
-
-    // Validation
-    if (!state || !city || !bg) {
-      setError("Please select State, City and Blood Group.");
-      setFilteredUsers([]);
-      return;
-    }
-
-    const { name: regionName } = State.getStateByCode(region) || {};
-
-    const filtered = users.filter(
-      user =>
-        (user.states === regionName || user.city === city) &&
-        (user.bgroup === bg || bg === "All blood groups")
-    );
-
-    setFilteredUsers(filtered);
+    const payload = {
+      state,
+      city,
+      bloodGroup: bg
+    };
+    dispatch(fetchUsersRequest(payload));
   };
 
   const handleSetState = value => {
     setState(value);
-    setCity(""); // Reset city if state changes
-  };
-
-  const handleSetCity = value => {
-    setCity(value);
+    setCity('');
   };
 
   return (
     <Container>
       <div className='d-flex align-items-center flex-column'>
-        {/* <div>
-          <h5 className='text-center mb-4'>Find Blood Donor</h5>
-          <div className='text-center mb-4'>
-            <img src={midImage} alt='Mid Decoration' style={{ height: "40px" }} />
-          </div>
-        </div> */}
         <Card
           className='mt-3 mx-3 p-3 d-flex align-items-center justify-content-center'
-          style={{ width: "70%" }}>
+          style={{ width: '90%' }}>
           <Row className='mb-5'>
             <Col md={3} className='mb-3'>
               <Form.Select
                 value={state}
                 onChange={e => handleSetState(e.target.value)}>
                 <option value=''>State</option>
-                {stateList.map((state, index) => (
-                  <option key={index} value={state.isoCode}>
-                    {state.name}
+                {stateList.map((stateItem, index) => (
+                  <option key={index} value={stateItem.isoCode}>
+                    {stateItem.name}
                   </option>
                 ))}
               </Form.Select>
@@ -105,7 +85,7 @@ const FindDonor = () => {
             <Col md={3} className='mb-3'>
               <Form.Select
                 value={city}
-                onChange={e => handleSetCity(e.target.value)}
+                onChange={e => setCity(e.target.value)}
                 disabled={!state}>
                 <option value=''>City</option>
                 {cityList.map(c => (
@@ -137,69 +117,69 @@ const FindDonor = () => {
           </Row>
 
           {error && (
-            <Alert variant='danger' className='text-center'>
+            <Alert variant='danger' className='text-center w-100'>
               {error}
             </Alert>
           )}
 
-          <Row>
-            {filteredUsers.length > 0
-              ? filteredUsers.map((user, idx) => (
-                <Col md={3} sm={6} xs={12} className='mb-4' key={idx}>
-                  <Card className='h-100 text-white bg-danger'>
-                    <Card.Img
-                      variant='top'
-                      src={userImage}
-                      style={{
-                        height: "200px",
-                        objectFit: "contain",
-                        paddingTop: "20px"
-                      }}
-                    />
-                    <Card.Body>
-                      <Card.Text>
-                        <strong>Name:</strong>
-                        <br />
-                        {user.fname} {user.lname}
-                      </Card.Text>
-                      <Card.Text>
-                        <strong>Phone:</strong>
-                        <br />
-                        {user.phone}
-                      </Card.Text>
-                      <Card.Text>
-                        <strong>Blood Group:</strong>
-                        <br />
-                        {user.bgroup}
-                      </Card.Text>
-                      <Card.Text>
-                        <strong>Region:</strong>
-                        <br />
-                        {user.city}, {user.states}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))
-              : !error && (
+          {loading ? (
+            <Col className='text-center my-4'>
+              <Spinner animation='border' variant='danger' />
+            </Col>
+          ) : (
+            <Row className='w-100'>
+              {users.length > 0 ? (
+                users.map((user, idx) => (
+                  <Col md={3} sm={6} xs={12} className='mb-4' key={idx}>
+                    <Card className=' text-white bg-danger'>
+                      <Card.Img
+                        variant='top'
+                        src={userImage}
+                        style={{
+                          height: '100px',
+                          objectFit: 'contain',
+                          paddingTop: '20px'
+                        }}
+                      />
+                      <Card.Body>
+                        <Card.Text className='bg-transparent text-white'>
+                          <strong>Name:</strong>
+                          <br />
+                          {user.fullName}
+                        </Card.Text>
+                        <Card.Text className='bg-transparent text-white'>
+                          <strong>Phone:</strong>
+                          <br />
+                          {user.phone}
+                        </Card.Text>
+
+                        <Card.Text className='bg-transparent text-white'>
+                          <strong>Blood Group:</strong>
+                          <br />
+                          {user.bloodGroup}
+                        </Card.Text>
+
+                        <Card.Text className='bg-transparent text-white'>
+                          <strong>Location:</strong>
+                          <br />
+                          {user.city}, {user.state}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))
+              ) : (
                 <Col className='text-center mt-5'>
                   <img
                     src={findImage}
                     alt='No Result Found'
-                    style={{ maxWidth: "300px" }}
+                    style={{ maxWidth: '300px' }}
                   />
                   <h5>Find donors</h5>
                 </Col>
-                // <Col className='text-center my-5'>
-                //   <img
-                //     src={noResultImage}
-                //     alt='No Result Found'
-                //     style={{ maxWidth: "300px", marginBottom: "20px" }}
-                //   />
-                //   <h5>No donors found matching your criteria!</h5>
-                // </Col>
               )}
-          </Row>
+            </Row>
+          )}
         </Card>
       </div>
     </Container>
